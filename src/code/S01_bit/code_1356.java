@@ -1,4 +1,4 @@
-package code;
+package code.S01_bit;
 
 import java.util.Arrays;
 import java.util.Comparator;
