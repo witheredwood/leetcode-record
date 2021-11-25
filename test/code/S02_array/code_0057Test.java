@@ -3,6 +3,8 @@ package code.S02_array;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 
 /**
  * 示例 1：
@@ -43,16 +45,43 @@ class code_0057Test extends code_0057 {
     int[] newInterval5 = {2, 7};
     int[][] expected5 = {{1, 7}};
 
+    int[][] intervals6 = {{1, 5}};
+    int[] newInterval6 = {6, 7};
+    int[][] expected6 = {{1, 5}, {6, 7}};
+
     @Test
     void testInsert() {
+        System.out.println("intervals = " + Arrays.deepToString(intervals1) + " newInterval = " + Arrays.toString(newInterval1));
         Assertions.assertArrayEquals(expected1, insert(intervals1, newInterval1));
-        System.out.println("--------------------------");
+    }
+
+    @Test
+    void testInsert2() {
+        System.out.println("intervals = " + Arrays.deepToString(intervals2) + " newInterval = " + Arrays.toString(newInterval2));
         Assertions.assertArrayEquals(expected2, insert(intervals2, newInterval2));
-        System.out.println("--------------------------");
+    }
+
+    @Test
+    void testInsert3() {
+        System.out.println("intervals = " + Arrays.deepToString(intervals3) + " newInterval = " + Arrays.toString(newInterval3));
         Assertions.assertArrayEquals(expected3, insert(intervals3, newInterval3));
-        System.out.println("--------------------------");
+    }
+
+    @Test
+    void testInsert4() {
+        System.out.println("intervals = " + Arrays.deepToString(intervals4) + " newInterval = " + Arrays.toString(newInterval4));
         Assertions.assertArrayEquals(expected4, insert(intervals4, newInterval4));
-        System.out.println("--------------------------");
+    }
+
+    @Test
+    void testInsert5() {
+        System.out.println("intervals = " + Arrays.deepToString(intervals5) + " newInterval = " + Arrays.toString(newInterval5));
         Assertions.assertArrayEquals(expected5, insert(intervals5, newInterval5));
+    }
+
+    @Test
+    void testInsert6() {
+        System.out.println("intervals = " + Arrays.deepToString(intervals6) + " newInterval = " + Arrays.toString(newInterval6));
+        Assertions.assertArrayEquals(expected6, insert(intervals6, newInterval6));
     }
 }
