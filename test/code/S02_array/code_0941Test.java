@@ -17,8 +17,11 @@ class code_0941Test extends code_0941 {
     int[] arr3 = { 0, 3, 2, 1};
     boolean expected3 = true;
 
+    int[] arr4 = { 0,1,2,3,4,5,6,7,8,9};
+    boolean expected4 = false;
+
     @Test
-    void testValidMountainArray() {
+    void testValidMountainArray1() {
         System.out.println("arr1 = " + Arrays.toString(arr1));
         Assertions.assertEquals(expected1, validMountainArray(arr1));
     }
@@ -33,5 +36,11 @@ class code_0941Test extends code_0941 {
     void testValidMountainArray3() {
         System.out.println("arr = " + Arrays.toString(arr3));
         Assertions.assertEquals(expected3, validMountainArray(arr3));
+    }
+
+    @Test
+    void testValidMountainArray4() {
+        System.out.println("arr = " + Arrays.toString(arr4));
+        Assertions.assertEquals(expected4, validMountainArray(arr4));
     }
 }

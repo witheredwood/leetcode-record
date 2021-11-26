@@ -24,6 +24,10 @@ package code.S02_array;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0941 {
+    /**
+     * @param arr 给定的整数数组
+     * @return true-该数组是先增后减数组；false-该数组不是先增后减数组
+     */
     public boolean validMountainArray(int[] arr) {
         int len = arr.length;
         if (len < 3) return false;
@@ -31,23 +35,11 @@ public class code_0941 {
         while (index < len && arr[index] > arr[index - 1]) {
             index++;
         }
+        // 单调递增或单调递减数组都不是山脉
+        if (index == 1 || index >= len) return false;
         while (index < len && arr[index] < arr[index - 1]) {
             index++;
         }
         return index >= len;
-    }
-
-    public boolean validMountainArray2(int[] arr) {
-        int len = arr.length;
-        if (len < 3) return false;
-        int index = 0;
-        while (index < len - 1 && arr[index] < arr[index + 1]) {
-            index++;
-        }
-        System.out.println("index = " + index);
-        while (index < len - 1 && arr[index] > arr[index + 1]) {
-            index++;
-        }
-        return index >= len - 1;
     }
 }

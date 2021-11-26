@@ -20,6 +20,10 @@ import java.util.LinkedList;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0042 {
+    /**
+     * @param height 每个宽度为 1 的柱子的高度数组
+     * @return 能接的雨水的量
+     */
     public int trap(int[] height) {
         int sum = 0;
         LinkedList<Integer> stack = new LinkedList<>();  // 栈中存放的是下标
@@ -35,8 +39,6 @@ public class code_0042 {
                     // 从栈中弹出两个数
                     int rightIndex = stack.removeFirst();
                     int leftIndex = stack.removeFirst();
-//                    int tmp = (i - leftIndex - 1) * (Math.min(height[i], height[leftIndex]) - height[rightIndex]);
-//                    System.out.println("tmp = " + tmp + " 宽 = " + (i - leftIndex - 1) + " 高 = " + (Math.min(height[i], height[leftIndex]) - height[rightIndex]));
                     sum += (i - leftIndex - 1) * (Math.min(height[i], height[leftIndex]) - height[rightIndex]);  // 计算面积：宽*高
                     // 压入新的最高高度的下标
                     stack.addFirst(height[leftIndex] >= height[rightIndex] ? leftIndex : rightIndex);
