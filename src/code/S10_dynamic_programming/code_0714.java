@@ -32,7 +32,39 @@ package code.S10_dynamic_programming;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0714 {
+    /**
+     * 贪心。目标：如何获得最大收益
+     * 当我们卖出一支股票时，我们就立即获得了以相同价格并且免除手续费买入一支股票的权利
+     *
+     * @param prices 某段时间内的股票价格
+     * @param fee    每次交易的手续费
+     * @return 该段时间内的最大利润
+     */
     public int maxProfit(int[] prices, int fee) {
-        return 0;
+        int buy = prices[0] + fee;  // 手中已有的买入的价格，先买入第0天的股票
+        int profits = 0;  // 利润
+        for (int i = 1; i < prices.length; i++) {  // 一个循环找到一次买入和卖出
+            // 当前的股票价格（加上手续费）小于手中股票的买入价格，则以更低价格买入，放弃之前的价格
+            if (prices[i] + fee < buy) {
+                buy = prices[i] + fee;  // 重新买入
+            } else if (prices[i] > buy) {  // 卖出
+                profits += prices[i] - buy;
+                buy = prices[i];  // 更新卖入价格
+            }
+            System.out.println("prices = " + prices[i] + "  buy = " + (buy - fee) + "  profits = " + profits);
+        }
+        return profits;
+    }
+
+    /**
+     * 动态规划
+     *
+     * @param prices 某段时间内的股票价格
+     * @param fee    每次交易的手续费
+     * @return 该段时间内的最大利润
+     */
+    public int maxProfit2(int[] prices, int fee) {
+        int profits = 0;  // 利润
+        return profits;
     }
 }

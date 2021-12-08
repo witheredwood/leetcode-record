@@ -1,9 +1,8 @@
 package code.S09_greedy;
 
+import code.S10_dynamic_programming.code_0062;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * 示例 1：

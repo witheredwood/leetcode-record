@@ -1,4 +1,4 @@
-package code.S09_greedy;
+package code.S10_dynamic_programming;
 
 import java.util.Arrays;
 
