@@ -72,17 +72,15 @@ public class code_0063 {
      * @return 左上角到右下角不同的路径的总数
      */
     public int uniquePathsWithObstacles2(int[][] obstacleGrid) {
-        if (obstacleGrid[0][0] == 1) return 0;
         int row = obstacleGrid.length, col = obstacleGrid[0].length;
         int[][] dp = new int[row][col];
-        dp[0][0] = 1;
         // 第一列全为1，除障碍物外
-        for (int i = 1; i < row; i++) {
-            if (obstacleGrid[i][0] == 0) dp[i][0] = dp[i - 1][0];
+        for (int i = 0; i < row && obstacleGrid[i][0] == 0; i++) {
+            dp[i][0] = 1;
         }
         // 第一行全为1，除障碍物外
-        for (int j = 1; j < col; j++) {
-            if (obstacleGrid[0][j] == 0) dp[0][j] = dp[0][j - 1];
+        for (int j = 0; j < col && obstacleGrid[0][j] == 0; j++) {
+            dp[0][j] = 1;
         }
         for (int i = 1; i < row; i++) {
             for (int j = 1; j < col; j++) {
@@ -91,7 +89,6 @@ public class code_0063 {
                 }
             }
         }
-        System.out.println(Arrays.deepToString(dp));
         return dp[row - 1][col - 1];
     }
 }
