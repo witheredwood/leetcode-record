@@ -26,7 +26,32 @@ package code.S10_dynamic_programming;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0070 {
+    /**
+     * 递归
+     * 到达n阶的有两种方法： 到达（n-1）阶楼梯后爬1个台阶，到达（n-2）阶楼梯后爬2个台阶。
+     * 所以，到达n阶楼梯的方法总数 = 到达（n-1）阶楼梯的方法总数 + 到达（n-2）阶楼梯的方法总数
+     * 递推公式 c(n) = c(n-1) + c(n-2)
+     *
+     * @param n 楼梯总阶数
+     * @return 有多少中方法到达楼顶
+     */
     public int climbStairs(int n) {
-        return 0;
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+        return climbStairs(n - 1) + climbStairs(n - 2);
     }
+
+    /**
+     * 动态规划
+     * 递推公式 c(n) = c(n-1) + c(n-2)
+     *
+     * @param n 楼梯总阶数
+     * @return 有多少中方法到达楼顶
+     */
+    public int climbStairs2(int n) {
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+        return climbStairs(n - 1) + climbStairs(n - 2);
+    }
+
 }
