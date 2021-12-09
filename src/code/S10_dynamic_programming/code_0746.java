@@ -24,23 +24,6 @@ import java.util.Arrays;
  */
 public class code_0746 {
     /**
-     * 递归
-     * 到达顶层的方法有两种：一种是到达 n-1 层，花费 n-1 层的花费值后到达顶层
-     * 一种是到达 n-2 层，花费 n-2 层的花费值后到达顶层，比较两种方法中花费值最小的就是最低花费
-     * 递推公式 c[n] = min{c[n-1] + cost[n-1], c[n-2] + cost[n-2]}
-     *
-     * @param cost 花费值数组
-     * @return 到达顶层的最低花费
-     */
-    public int minCostClimbingStairs(int[] cost) {
-        int len = cost.length;
-        if (len == 1) return cost[0];
-        if (len == 2) return Math.min(cost[0], cost[1]);
-
-        return 0;
-    }
-
-    /**
      * 动态规划
      * 到达顶层的方法有两种：一种是到达 n-1 层，花费 n-1 层的花费值后到达顶层
      * 一种是到达 n-2 层，花费 n-2 层的花费值后到达顶层，比较两种方法中花费值最小的就是最低花费
@@ -54,7 +37,7 @@ public class code_0746 {
      * @param cost 花费值数组
      * @return 到达顶层的最低花费
      */
-    public int minCostClimbingStairs2(int[] cost) {
+    public int minCostClimbingStairs(int[] cost) {
         int len = cost.length;
         if (len <= 1) return 0;
         int[] dp = new int[len + 1];

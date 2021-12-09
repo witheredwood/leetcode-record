@@ -22,21 +22,10 @@ class code_0746Test extends code_0746 {
     int[] cost2 = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
     int expected2 = 6;
 
+
     @Test
     void testMinCostClimbingStairs() {
-//        Assertions.assertEquals(expected1, minCostClimbingStairs(cost1));
-//        Assertions.assertEquals(expected2, minCostClimbingStairs(cost2));
-    }
-
-    @Test
-    void testMinCostClimbingStairs2() {
-        Assertions.assertEquals(expected1, minCostClimbingStairs2(cost1));
-        Assertions.assertEquals(expected2, minCostClimbingStairs2(cost2));
-    }
-
-    @Test
-    void testMinCostClimbingStairs3() {
-        Assertions.assertEquals(expected1, minCostClimbingStairs3(cost1));
-        Assertions.assertEquals(expected2, minCostClimbingStairs3(cost2));
+        Assertions.assertEquals(expected1, minCostClimbingStairs(cost1));
+        Assertions.assertEquals(expected2, minCostClimbingStairs(cost2));
     }
 }
