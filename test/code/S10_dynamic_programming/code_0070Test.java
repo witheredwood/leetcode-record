@@ -31,4 +31,18 @@ class code_0070Test extends code_0070 {
         Assertions.assertEquals(expected2, climbStairs(n2));
         Assertions.assertEquals(expected3, climbStairs(n3));
     }
+
+    @Test
+    void testClimbStairs2() {
+        Assertions.assertEquals(expected1, climbStairs2(n1));
+        Assertions.assertEquals(expected2, climbStairs2(n2));
+        Assertions.assertEquals(expected3, climbStairs2(n3));
+    }
+
+    @Test
+    void testClimbStairs3() {
+        Assertions.assertEquals(expected1, climbStairs3(n1));
+        Assertions.assertEquals(expected2, climbStairs3(n2));
+        Assertions.assertEquals(expected3, climbStairs3(n3));
+    }
 }
