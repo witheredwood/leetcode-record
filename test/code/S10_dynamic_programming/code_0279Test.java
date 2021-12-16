@@ -18,11 +18,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class code_0279Test extends code_0279 {
     int n1 = 12, expected1 = 3;
     int n2 = 13, expected2 = 2;
+    int n3 = 5, expected3 = 2;
 
     @Test
     void testNumSquares() {
         Assertions.assertEquals(expected1, numSquares(n1));
         System.out.println("----------------------");
         Assertions.assertEquals(expected2, numSquares(n2));
+        System.out.println("----------------------");
+        Assertions.assertEquals(expected3, numSquares(n3));
     }
 }

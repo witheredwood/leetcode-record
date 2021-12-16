@@ -27,8 +27,18 @@ import java.util.Arrays;
  */
 public class code_0279 {
     /**
-     * @param n
-     * @return
+     * 动态规划：完全背包
+     * 使用一维数组存储， dp[j]: 组成整数 j 的完全平方数的最少个数
+     * 递推公式 / 状态转移方程：dp[j] = min{dp[j-1], dp[j-4] .... } + 1
+     * 因为 dp[j] 是由 dp[j-1], dp[j-4], dp[j-9] ... 等这些值推导而来
+     * 初始化， dp[0]=0
+     * 推导 dp 数组， 以 n = 5 为例
+     *   0 1 2 3 4 5
+     * 1 0 1 2 3 4 5
+     * 4 0 1 2 3 1 2
+     *
+     * @param n 正整数
+     * @return 组成 n 的完全平方数的最少个数
      */
     public int numSquares(int n) {
         int[] dp = new int[n + 1];
