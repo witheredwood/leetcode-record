@@ -42,9 +42,7 @@ public class code_0279 {
      */
     public int numSquares(int n) {
         int[] dp = new int[n + 1];
-        for (int i = 0; i <= n; i++) {
-            dp[i] = Integer.MAX_VALUE;
-        }
+        Arrays.fill(dp, Integer.MAX_VALUE);
         dp[0] = 0;  // 初始化
         int size = (int) (Math.sqrt(n));
         System.out.println("size = " + size);
