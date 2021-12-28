@@ -62,13 +62,16 @@ public class code_0131 {
     }
 
     /**
+     * 判断字符串是不是回文串
+     *
      * @param s 字符串
      * @return 该字符串是否是回文串
      */
     public boolean isHuiWen(String s) {
-        for (int i = 0, j = s.length() - 1; i <= j; i++, j--) {
-            if (s.charAt(i) != s.charAt(j))
+        for (int i = 0, j = s.length() - 1; i < j; i++, j--) {
+            if (s.charAt(i) != s.charAt(j)){
                 return false;
+            }
         }
         return true;
     }
