@@ -41,23 +41,27 @@ class code_0209Test extends code_0209 {
     void testMinSubArrayLen1() {
         System.out.println("nums = " + Arrays.toString(nums1) + " target = " + target1);
         Assertions.assertEquals(expected1, minSubArrayLen(target1, nums1));
+        Assertions.assertEquals(expected1, minSubArrayLen2(target1, nums1));
     }
 
     @Test
     void testMinSubArrayLen2() {
         System.out.println("nums = " + Arrays.toString(nums2) + " target = " + target2);
         Assertions.assertEquals(expected2, minSubArrayLen(target2, nums2));
+        Assertions.assertEquals(expected2, minSubArrayLen2(target2, nums2));
     }
 
     @Test
     void testMinSubArrayLen3() {
         System.out.println("nums = " + Arrays.toString(nums3) + " target = " + target3);
         Assertions.assertEquals(expected3, minSubArrayLen(target3, nums3));
+        Assertions.assertEquals(expected3, minSubArrayLen2(target3, nums3));
     }
 
     @Test
     void testMinSubArrayLen4() {
         System.out.println("nums = " + Arrays.toString(nums4) + " target = " + target4);
         Assertions.assertEquals(expected4, minSubArrayLen(target4, nums4));
+        Assertions.assertEquals(expected4, minSubArrayLen2(target4, nums4));
     }
 }

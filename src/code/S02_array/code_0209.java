@@ -48,4 +48,25 @@ public class code_0209 {
         }
         return res;
     }
+
+    /**
+     * 滑动窗口
+     *
+     * @param target 目标和，正整数
+     * @param nums   正整数数组
+     * @return 子数组之和不小于 target 的数组长度
+     */
+    public int minSubArrayLen2(int target, int[] nums) {
+        int sum = 0;  // 滑动窗口中的和
+        int start = 0;  // 滑动窗口的起始位置
+        int subLen = Integer.MAX_VALUE;  // 滑动窗口的长度
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            while (sum >= target) {
+                subLen = Math.min(subLen, i - start + 1);
+                sum -= nums[start++];
+            }
+        }
+        return subLen == Integer.MAX_VALUE ? 0: subLen;
+    }
 }
