@@ -22,7 +22,7 @@ class code_0059Test extends code_0059 {
 
     @Test
     void testGenerateMatrix() {
-        Assertions.assertArrayEquals(expected2, generateMatrix(n2));S
+        Assertions.assertArrayEquals(expected2, generateMatrix(n2));
         System.out.println("------------------------");
         Assertions.assertArrayEquals(expected1, generateMatrix(n1));
     }
