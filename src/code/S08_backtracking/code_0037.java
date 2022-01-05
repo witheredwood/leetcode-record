@@ -68,7 +68,7 @@ public class code_0037 {
      * @param row   第几行
      * @param col   第几列
      * @param digit 数字
-     * @return 该位置上是否可以填数字 digit
+37     * @return 该位置上是否可以填数字 digit
      */
     public boolean isCanSet(char[][] board, int row, int col, char digit) {
         // 同一行中是否可以放置该数字
