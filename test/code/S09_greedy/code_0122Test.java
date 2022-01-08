@@ -26,14 +26,15 @@ import static org.junit.jupiter.api.Assertions.*;
  * 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
  */
 class code_0122Test extends code_0122 {
-    int[] prices1 = {7,1,5,3,6,4};
+    int[] prices1 = {7, 1, 5, 3, 6, 4};
     int expected1 = 7;
 
-    int[] prices2 = {1,2,3,4,5};
+    int[] prices2 = {1, 2, 3, 4, 5};
     int expected2 = 4;
 
-    int[] prices3 = {7,6,4,3,1};
+    int[] prices3 = {7, 6, 4, 3, 1};
     int expected3 = 0;
+
     @Test
     void testMaxProfit() {
         Assertions.assertEquals(expected1, maxProfit(prices1));
@@ -41,5 +42,14 @@ class code_0122Test extends code_0122 {
         Assertions.assertEquals(expected2, maxProfit(prices2));
         System.out.println("-------------------------");
         Assertions.assertEquals(expected3, maxProfit(prices3));
+    }
+
+    @Test
+    void testMaxProfit2() {
+        Assertions.assertEquals(expected1, maxProfit2(prices1));
+        System.out.println("-------------------------");
+        Assertions.assertEquals(expected2, maxProfit2(prices2));
+        System.out.println("-------------------------");
+        Assertions.assertEquals(expected3, maxProfit2(prices3));
     }
 }

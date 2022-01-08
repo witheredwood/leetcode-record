@@ -55,4 +55,23 @@ public class code_0122 {
         System.out.println("profit = " + profit);
         return profit;
     }
+
+    /**
+     * 贪心：把利润分解为每天的利润相加
+     * 局部最优：收集每天的正利润，全局最优：求得最大利润
+     *
+     * @param prices 正整数数组
+     * @return 最大利润
+     */
+    public int maxProfit2(int[] prices) {
+        int profit = 0;  // 初始时利润
+        for (int i = 1; i < prices.length; i++) {
+            int pro = prices[i] - prices[i - 1];  // 计算当天卖出的利润
+            if (pro > 0) {  // 利润为正
+                profit += pro;
+            }
+        }
+        System.out.println("profit = " + profit);
+        return profit;
+    }
 }
