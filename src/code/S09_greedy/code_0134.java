@@ -77,17 +77,17 @@ public class code_0134 {
      */
     public int canCompleteCircuit2(int[] gas, int[] cost) {
         int len = gas.length;
-        int sum;
+        int curSum = 0, totalSum = 0;
+        int index = 0;
         for (int i = 0; i < len; i++) {
-            if (gas[i] < cost[i]) continue;  // 当前位置不能作为起始位置
-            sum = 0;
-            for (int j = i; j < i + len; j++) {
-                int index = j % len;
-                sum += gas[index] - cost[index];
-                if (sum < 0) break;
+            curSum += gas[i] - cost[i];
+            totalSum += gas[i] - cost[i];
+            if (curSum < 0) {
+                index = (i + 1) % len;
+                curSum = 0;
             }
-           if (sum >= 0) return i;
         }
-        return -1;
+        if (totalSum < 0) return -1;
+        return index;
     }
 }

@@ -48,22 +48,22 @@ class code_0134Test extends code_0134 {
     @Test
     void testCanCompleteCircuit1() {
         Assertions.assertEquals(expected1, canCompleteCircuit(gas1, cost1));
-        System.out.println("--------------------");
+        System.out.println("---------------------------------------");
         Assertions.assertEquals(expected2, canCompleteCircuit(gas2, cost2));
-        System.out.println("--------------------");
+        System.out.println("---------------------------------------");
         Assertions.assertEquals(expected3, canCompleteCircuit(gas3, cost3));
-        System.out.println("--------------------");
+        System.out.println("---------------------------------------");
         Assertions.assertEquals(expected4, canCompleteCircuit(gas4, cost4));
     }
 
     @Test
     void testCanCompleteCircuit2() {
         Assertions.assertEquals(expected1, canCompleteCircuit2(gas1, cost1));
-        System.out.println("--------------------");
+        System.out.println("---------------------------------------");
         Assertions.assertEquals(expected2, canCompleteCircuit2(gas2, cost2));
-        System.out.println("--------------------");
+        System.out.println("---------------------------------------");
         Assertions.assertEquals(expected3, canCompleteCircuit2(gas3, cost3));
-        System.out.println("--------------------");
+        System.out.println("---------------------------------------");
         Assertions.assertEquals(expected4, canCompleteCircuit2(gas4, cost4));
     }
 }
