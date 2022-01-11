@@ -31,13 +31,11 @@ public class code_0349 {
      * @return 两个数组的交集
      */
     public int[] intersection(int[] nums1, int[] nums2) {
-        Integer[] inte1 = Arrays.stream(nums1).boxed().toArray(Integer[]::new);
         Set<Integer> set1 = new HashSet<>(Arrays.asList(Arrays.stream(nums1).boxed().toArray(Integer[]::new)));
-        Set<Integer> set2 = new HashSet<>(Arrays.asList(Arrays.stream(nums2).boxed().toArray(Integer[]::new)));
         Set<Integer> set = new HashSet<>();
-        System.out.println("set1 = " + set1.toString() + " set2 = " + set2.toString());
-        for (int val : set1) {
-            if (set2.contains(val)) {
+        System.out.println("set1 = " + set1.toString());
+        for (int val : nums2) {
+            if (set1.contains(val)) {
                 set.add(val);
             }
         }
@@ -47,6 +45,9 @@ public class code_0349 {
         for (int val : set) {
             res[i++] = val;
         }
+        // set 转 Integer[]，再转 int[]
+//        Integer[] array = set.toArray(new Integer[0]);
+//        int[] res = Arrays.stream(array).mapToInt(Integer::valueOf).toArray();
         System.out.println("res = " + Arrays.toString(res));
         return res;
     }
