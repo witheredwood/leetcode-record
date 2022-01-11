@@ -1,0 +1,53 @@
+package code.S04_hash;
+
+import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+/**
+ * 349. 两个数组的交集
+ * <p>
+ * 给定两个数组，编写一个函数来计算它们的交集。 
+ * <p>
+ * 示例 1：
+ * 输入：nums1 = [1,2,2,1], nums2 = [2,2]
+ * 输出：[2]
+ * 示例 2：
+ * 输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+ * 输出：[9,4]
+ * <p>
+ * 说明：
+ * 输出结果中的每个元素一定是唯一的。
+ * 我们可以不考虑输出结果的顺序。
+ * <p>
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/intersection-of-two-arrays
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+public class code_0349 {
+    /**
+     * @param nums1 数组
+     * @param nums2 数组
+     * @return 两个数组的交集
+     */
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Integer[] inte1 = Arrays.stream(nums1).boxed().toArray(Integer[]::new);
+        Set<Integer> set1 = new HashSet<>(Arrays.asList(Arrays.stream(nums1).boxed().toArray(Integer[]::new)));
+        Set<Integer> set2 = new HashSet<>(Arrays.asList(Arrays.stream(nums2).boxed().toArray(Integer[]::new)));
+        Set<Integer> set = new HashSet<>();
+        System.out.println("set1 = " + set1.toString() + " set2 = " + set2.toString());
+        for (int val : set1) {
+            if (set2.contains(val)) {
+                set.add(val);
+            }
+        }
+        System.out.println("set = " + set.toString());
+        int[] res = new int[set.size()];
+        int i = 0;
+        for (int val : set) {
+            res[i++] = val;
+        }
+        System.out.println("res = " + Arrays.toString(res));
+        return res;
+    }
+}
