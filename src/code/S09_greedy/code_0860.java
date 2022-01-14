@@ -51,19 +51,19 @@ public class code_0860 {
                 int change = bills[i] - 5;
                 for (int j = count.length - 1; j >= 0; j--) {
                     int money = (j + 1) * 5;
-                    if (count[j] > 0 && change > money) {
+                    if (count[j] > 0 && change >= money) {
                         int need = change / money; // 需要几张这个面值的零钱
                         need = Math.min(need, count[j]);
                         change -= need * money;
                         count[j] -= need;
                     }
                 }
+                System.out.println("change = " + change);
                 // 零钱不够
-                if (change > 0)
-                    return false;
+                if (change > 0) return false;
             }
             // 收钱啦
-            count[bills[i]]++;
+            count[bills[i] / 5 - 1]++;
         }
         return true;
     }
