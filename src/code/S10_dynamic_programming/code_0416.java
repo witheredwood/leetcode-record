@@ -1,7 +1,5 @@
 package code.S10_dynamic_programming;
 
-import java.util.Arrays;
-
 /**
  * 416. 分割等和子集
  * <p>
@@ -30,27 +28,35 @@ public class code_0416 {
      */
     public boolean canPartition(int[] nums) {
         int len = nums.length;
-        int sum = 0;  // 数组总和
+        int sum = 0; // 数组总和
         for (int i = 0; i < len; i++) {
             sum += nums[i];
         }
         System.out.println("sum = " + sum);
-        if (sum % 2 == 1) return false;  // 如果数组总和为奇数，则不可能分成两个总和相等的子集
-        int bisum = sum / 2;  // 数组总和的一半
+        if (sum % 2 == 1)
+            return false; // 如果数组总和为奇数，则不可能分成两个总和相等的子集
+        int bisum = sum / 2; // 数组总和的一半
         int[][] dp = new int[len][bisum + 1];
         // 初始化第一行
         for (int i = 0; i <= bisum; i++) {
-            if (nums[0] > bisum) return false;
-            if (nums[0] == bisum) return true;
-            if (nums[0] <= i) dp[0][i] = nums[0];
+            if (nums[0] > bisum)
+                return false;
+            if (nums[0] == bisum)
+                return true;
+            if (nums[0] <= i)
+                dp[0][i] = nums[0];
         }
         // 遍历
         for (int i = 1; i < len; i++) {
-            if (nums[i] > bisum) return false;
-            if (nums[i] == bisum) return true;
+            if (nums[i] > bisum)
+                return false;
+            if (nums[i] == bisum)
+                return true;
             for (int j = 0; j <= bisum; j++) {
-                if (nums[i] <= j) dp[i][j] = Math.max(dp[i - 1][j], nums[i] + dp[i - 1][j - nums[i]]);
-                else dp[i][j] = dp[i - 1][j];
+                if (nums[i] <= j)
+                    dp[i][j] = Math.max(dp[i - 1][j], nums[i] + dp[i - 1][j - nums[i]]);
+                else
+                    dp[i][j] = dp[i - 1][j];
             }
         }
         return dp[len - 1][bisum] == bisum;

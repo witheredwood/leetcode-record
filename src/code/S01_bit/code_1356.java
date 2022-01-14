@@ -23,7 +23,8 @@ public class code_1356 {
         // 计数
         for (int i = 0; i < arr.length; i++) {
             if (0 == arr[i]) {
-                if (lists[0] == null) lists[0] = new LinkedList<Integer>();
+                if (lists[0] == null)
+                    lists[0] = new LinkedList<Integer>();
                 lists[0].add(0);
             } else {
                 int count = 0, tmp = arr[i];
@@ -31,7 +32,8 @@ public class code_1356 {
                     count++;
                     tmp &= tmp - 1;
                 }
-                if (lists[count] == null) lists[count] = new LinkedList<Integer>();
+                if (lists[count] == null)
+                    lists[count] = new LinkedList<Integer>();
                 lists[count].add(arr[i]);
             }
         }
@@ -49,7 +51,7 @@ public class code_1356 {
                         return o1 - o2;
                     }
                 });
-                for (int val: list) {
+                for (int val : list) {
                     arr[index++] = val;
                 }
             }

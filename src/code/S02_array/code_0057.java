@@ -1,7 +1,6 @@
 package code.S02_array;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,7 +34,8 @@ import java.util.List;
 public class code_0057 {
     public int[][] insert(int[][] intervals, int[] newInterval) {
         int len = intervals.length;
-        if (len == 0) return new int[][]{newInterval};
+        if (len == 0)
+            return new int[][] { newInterval };
         List<int[]> list = new LinkedList<>();
         int index = 0;
         while (index < len) {
@@ -51,7 +51,8 @@ public class code_0057 {
             }
         }
         list.add(newInterval);
-        while (index < len) list.add(intervals[index++]);
+        while (index < len)
+            list.add(intervals[index++]);
         int[][] res = new int[list.size()][2];
         for (int i = 0; i < list.size(); i++) {
             res[i][0] = list.get(i)[0];

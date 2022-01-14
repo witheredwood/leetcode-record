@@ -1,6 +1,5 @@
 package code.S10_dynamic_programming;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -41,20 +40,21 @@ public class code_0518 {
     /**
      * 动态规划：完全背包
      * 使用二维数组存储，dp[j]: 总金额为 j 时，有多少种组合方案
-     * 递推公式 / 状态转移方程，dp[j] = dp[j] + dp[j-coins[i]]  不放+放 的方案数
+     * 递推公式 / 状态转移方程，dp[j] = dp[j] + dp[j-coins[i]] 不放+放 的方案数
      * 递推 dp ，以 5, coins = [1, 2, 5] 为例
-     *    0 1 2 3 4 5
+     * 0 1 2 3 4 5
      * 1 [1,1,1,1,1,1]
      * 2 [1,1,2,2,3,3]
      * 5 [1,1,2,2,3,4]
+     * 
      * @param amount 总金额
-     * @param coins 硬币面值数组
+     * @param coins  硬币面值数组
      * @return 总金额可以由现有的面值数组组成，有多少种方案
      */
     public int change(int amount, int[] coins) {
         int[] dp = new int[amount + 1];
         dp[0] = 1;
-        for (int one: coins) {
+        for (int one : coins) {
             for (int i = one; i <= amount; i++) {
                 dp[i] += dp[i - one];
             }

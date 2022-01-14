@@ -1,7 +1,5 @@
 package code.S10_dynamic_programming;
 
-import java.util.Arrays;
-
 /**
  * 746. 使用最小花费爬楼梯
  * <p>
@@ -39,7 +37,8 @@ public class code_0746 {
      */
     public int minCostClimbingStairs(int[] cost) {
         int len = cost.length;
-        if (len <= 1) return 0;
+        if (len <= 1)
+            return 0;
         int[] dp = new int[len + 1];
         dp[0] = 0;
         dp[1] = 0;

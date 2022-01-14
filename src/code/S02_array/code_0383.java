@@ -2,12 +2,12 @@ package code.S02_array;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 /**
  * 383. 赎金信
  * 为了不在赎金信中暴露字迹，从杂志上搜索各个需要的字母，组成单词来表达意思。
- * 给你一个赎金信 (ransomNote) 字符串和一个杂志(magazine)字符串，判断 ransomNote 能不能由 magazines 里面的字符构成。
+ * 给你一个赎金信 (ransomNote) 字符串和一个杂志(magazine)字符串，判断 ransomNote 能不能由 magazines
+ * 里面的字符构成。
  * 如果可以构成，返回 true ；否则返回 false 。
  * magazine 中的每个字符只能在 ransomNote 中使用一次。
  * <p>
@@ -55,7 +55,8 @@ public class code_0383 {
         System.out.println("mapMagazine：" + mapMagazine.toString());
         // 比较
         for (char c : mapRansomNote.keySet()) {
-            if (!mapMagazine.containsKey(c) || mapMagazine.get(c) < mapRansomNote.get(c)) return false;
+            if (!mapMagazine.containsKey(c) || mapMagazine.get(c) < mapRansomNote.get(c))
+                return false;
         }
         return true;
     }
@@ -65,13 +66,14 @@ public class code_0383 {
      * 如果能找到，把杂志(magazine)字符串中的该字符置空。直到遍历完赎金信(ransomNote)字符串。
      *
      * @param ransomNote 赎金信(ransomNote)字符串
-     * @param magazine 杂志(magazine)字符串
+     * @param magazine   杂志(magazine)字符串
      * @return 赎金信 ransomNote 能不能由杂志 magazines 里面的字符构成
      */
     public boolean canConstruct2(String ransomNote, String magazine) {
         for (char c : ransomNote.toCharArray()) {
             int index = magazine.indexOf(Character.toString(c));
-            if (index == -1) return false;
+            if (index == -1)
+                return false;
             magazine = magazine.replaceFirst(Character.toString(c), "");
         }
         System.out.println("magazine: " + magazine);
@@ -83,15 +85,16 @@ public class code_0383 {
      * 所以在这个方法中，使用可变字符串 StringBuilder 来处理 magazine 字符串的修改。减少多余对象的创建
      *
      * @param ransomNote 赎金信(ransomNote)字符串
-     * @param magazine 杂志(magazine)字符串
+     * @param magazine   杂志(magazine)字符串
      * @return 赎金信 ransomNote 能不能由杂志 magazines 里面的字符构成
      */
     public boolean canConstruct3(String ransomNote, String magazine) {
         StringBuilder sb = new StringBuilder(magazine);
-        for (char c: ransomNote.toCharArray()) {
+        for (char c : ransomNote.toCharArray()) {
             int index = sb.indexOf(Character.toString(c));
-            if (index == -1) return false;
-            sb.replace(index, index+1, "");
+            if (index == -1)
+                return false;
+            sb.replace(index, index + 1, "");
         }
         System.out.println("StringBuilder: " + sb.toString());
         System.out.println("magazine: " + magazine);

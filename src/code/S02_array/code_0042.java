@@ -26,10 +26,9 @@ public class code_0042 {
      */
     public int trap(int[] height) {
         int sum = 0;
-        LinkedList<Integer> stack = new LinkedList<>();  // 栈中存放的是下标
+        LinkedList<Integer> stack = new LinkedList<>(); // 栈中存放的是下标
         int len = height.length;
         for (int i = 0; i < len; i++) {
-            int current = height[i];
             while (stack.size() > 0 && height[i] > height[stack.getFirst()]) {
                 if (stack.size() < 2) {
                     while (stack.size() > 0) {
@@ -39,7 +38,7 @@ public class code_0042 {
                     // 从栈中弹出两个数
                     int rightIndex = stack.removeFirst();
                     int leftIndex = stack.removeFirst();
-                    sum += (i - leftIndex - 1) * (Math.min(height[i], height[leftIndex]) - height[rightIndex]);  // 计算面积：宽*高
+                    sum += (i - leftIndex - 1) * (Math.min(height[i], height[leftIndex]) - height[rightIndex]); // 计算面积：宽*高
                     // 压入新的最高高度的下标
                     stack.addFirst(height[leftIndex] >= height[rightIndex] ? leftIndex : rightIndex);
                 }

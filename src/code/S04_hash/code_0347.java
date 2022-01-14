@@ -30,18 +30,18 @@ public class code_0347 {
         Map<Integer, Integer> map = new TreeMap<>();
         // 计数
         for (int val : nums) {
-            if (map.containsKey(val)) map.replace(val, map.get(val) + 1);
-            else map.put(val, 1);
+            if (map.containsKey(val))
+                map.replace(val, map.get(val) + 1);
+            else
+                map.put(val, 1);
         }
-        // 排序
-        Comparator comparator = new Comparator<Map.Entry<Integer, Integer>>() {
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
             @Override
             public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
-                return o2.getValue() - o1.getValue();  // 降序
+                return o2.getValue() - o1.getValue(); // 降序
             }
-        };
-        List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(map.entrySet());
-        Collections.sort(list, comparator);
+        });
         // 返回结果
         int[] res = new int[k];
         for (int i = 0; i < k; i++) {

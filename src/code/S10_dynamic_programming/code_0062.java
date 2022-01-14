@@ -1,7 +1,5 @@
 package code.S10_dynamic_programming;
 
-import java.util.Arrays;
-
 /**
  * 62. 不同路径
  * <p>
@@ -42,8 +40,10 @@ public class code_0062 {
      * @return 从 [0,0] 到 [m-1,n-1] 有多少条路
      */
     public int uniquePaths(int m, int n) {
-        if (m == 1 && n == 1) return 1;
-        if (m == 0 || n == 0) return 0;
+        if (m == 1 && n == 1)
+            return 1;
+        if (m == 0 || n == 0)
+            return 0;
         return uniquePaths(m, n - 1) + uniquePaths(m - 1, n);
     }
 
@@ -94,9 +94,11 @@ public class code_0062 {
         int[][] array = new int[m][n];
         array[0][1] = 1;
         // 第一行全为1
-        for (int j = 0; j < n; j++) array[0][j] = 1;
+        for (int j = 0; j < n; j++)
+            array[0][j] = 1;
         // 第一列全为1
-        for (int i = 0; i < m; i++) array[i][0] = 1;
+        for (int i = 0; i < m; i++)
+            array[i][0] = 1;
         // 其余等于上一个+左一个
         for (int i = 1; i < m; i++) {
             for (int j = 1; j < n; j++)

@@ -1,9 +1,6 @@
 package code.S10_dynamic_programming;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * 322. 零钱兑换
@@ -57,16 +54,16 @@ public class code_0322 {
      * @return 由硬币组成的总金额有多少种
      */
     public int coinChange(int[] coins, int amount) {
-        int len = coins.length;
         int[] dp = new int[amount + 1];
         // 用整数的无穷大数初始化数组所有数
         for (int i = 0; i <= amount; i++) {
             dp[i] = Integer.MAX_VALUE;
         }
-        dp[0] = 0;   // 初始化
+        dp[0] = 0; // 初始化
         for (int i = 0; i < coins.length; i++) {
             for (int j = coins[i]; j <= amount; j++) {
-                if (dp[j - coins[i]] != Integer.MAX_VALUE) dp[j] = Math.min(dp[j], dp[j - coins[i]] + 1);
+                if (dp[j - coins[i]] != Integer.MAX_VALUE)
+                    dp[j] = Math.min(dp[j], dp[j - coins[i]] + 1);
             }
         }
         System.out.println(Arrays.toString(dp));
