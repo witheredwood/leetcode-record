@@ -2,12 +2,12 @@ package code.S09_greedy;
 
 /**
  * 860.柠檬水找零
- *
+ * <p>
  * 在柠檬水摊上，每一杯柠檬水的售价为 5 美元。顾客排队购买你的产品，（按账单 bills 支付的顺序）一次购买一杯。
  * 每位顾客只买一杯柠檬水，然后向你付 5 美元、10 美元或 20 美元。你必须给每个顾客正确找零，也就是说净交易是每位顾客向你支付 5 美元。
  * 注意，一开始你手头没有任何零钱。
  * 给你一个整数数组 bills ，其中 bills[i] 是第 i 位顾客付的账。如果你能给每位顾客正确找零，返回 true ，否则返回 false 。
- *
+ * <p>
  * 示例 1：
  * 输入：bills = [5,5,5,10,20]
  * 输出：true
@@ -34,16 +34,36 @@ package code.S09_greedy;
  * 提示：
  * 1 <= bills.length <= 10^5
  * bills[i] 不是 5 就是 10 或是 20 
- *
+ * <p>
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/lemonade-change
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class code_0806 {
+public class code_0860 {
+    /**
+     * @param bills 支付账单，整数数组
+     * @return 是否能够找零钱
+     */
     public boolean lemonadeChange(int[] bills) {
-        int[] count = new int[3];
+        int[] count = new int[4];
         for (int i = 0; i < bills.length; i++) {
-
+            if (bills[i] > 5) { // 要找零钱了
+                int change = bills[i] - 5;
+                for (int j = count.length - 1; j >= 0; j--) {
+                    int money = (j + 1) * 5;
+                    if (count[j] > 0 && change > money) {
+                        int need = change / money; // 需要几张这个面值的零钱
+                        need = Math.min(need, count[j]);
+                        change -= need * money;
+                        count[j] -= need;
+                    }
+                }
+                // 零钱不够
+                if (change > 0)
+                    return false;
+            }
+            // 收钱啦
+            count[bills[i]]++;
         }
         return true;
     }
