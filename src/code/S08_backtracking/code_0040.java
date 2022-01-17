@@ -39,14 +39,16 @@ public class code_0040 {
      * @return 组成目标数的所有组合
      */
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> res = new LinkedList<>();  // 保存符合条件的结果的集合
+        Set<List<Integer>> res = new HashSet<>();  // 保存符合条件的结果的集合
         LinkedList<Integer> path = new LinkedList<>();  // 保存符合条件的结果
         boolean[] visited = new boolean[candidates.length];  // 回溯时同一层的数是否被访问过
 
         Arrays.sort(candidates);  // 排序。[2,5,2,1,2] -> [1,2,2,2,5]
-        System.out.println("candidates -> " + Arrays.toString(candidates));
         backtracking(candidates, target, 0, visited, res, path, 0);
-        return res;
+
+        List<List<Integer>> list = new LinkedList<>();  // 保存符合条件的结果的集合
+        list.addAll(res);
+        return list;
     }
 
     /**
@@ -56,7 +58,7 @@ public class code_0040 {
      * @param target     整数
      * @param startIndex 回溯开始下标
      */
-    public void backtracking(int[] candidates, int target, int startIndex, boolean[] visited, List<List<Integer>> res, LinkedList<Integer> path, int sum) {
+    public void backtracking(int[] candidates, int target, int startIndex, boolean[] visited, Set<List<Integer>> res, LinkedList<Integer> path, int sum) {
         if (sum > target) return;
         if (sum == target) {
             if (path.size() > 0) res.add(new LinkedList<>(path));
@@ -65,8 +67,8 @@ public class code_0040 {
 
         for (int i = startIndex; i < candidates.length && sum + candidates[i] <= target; i++) {
             // 判断同一层的节点中是否已经访问过与当前节点相同的数
-            if (i > 0 && visited[i - 1] && candidates[i] == candidates[i - 1]) continue;
-
+            if (i > 0 && candidates[i] == candidates[i - 1] && visited[i - 1]) continue;
+            visited[i] = false;
             path.add(candidates[i]);
             sum += candidates[i];
             backtracking(candidates, target, i + 1, visited, res, path, sum);
