@@ -4,8 +4,8 @@ package code.S07_tree;
  * 树节点
  */
 public class TreeNode {
-    int val;
-    TreeNode left, right;
+    public int val;
+    public TreeNode left, right;
 
     public TreeNode() {
     }
