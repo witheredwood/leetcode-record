@@ -32,7 +32,7 @@ import java.util.Set;
  */
 public class code_0015 {
   /**
-   * 超出时间限制
+   * 数组排序后，固定一个数，找另外两个数
    * time: O(n^2)   space: O(1)
    *
    * @param nums 数组
