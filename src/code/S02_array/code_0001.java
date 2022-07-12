@@ -1,4 +1,4 @@
-package code.S01_bit;
+package code.S02_array;
 
 import java.util.ArrayList;
 import java.util.Collections;
