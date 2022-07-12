@@ -1,9 +1,0 @@
-{
-    "java.format.settings.url": "eclipse-formatter.xml",
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "E:/DevelopmentTool/java/junit5/junit-platform-console-standalone-1.7.0-M1.jar",
-        "e:\\Java\\junit\\jcommander-1.81.jar",
-        "e:\\Java\\junit\\testng-7.5.jar"
-    ]
-}
