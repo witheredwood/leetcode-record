@@ -20,32 +20,64 @@ import java.util.LinkedList;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0042 {
-    /**
-     * @param height 每个宽度为 1 的柱子的高度数组
-     * @return 能接的雨水的量
-     */
-    public int trap(int[] height) {
-        int sum = 0;
-        LinkedList<Integer> stack = new LinkedList<>(); // 栈中存放的是下标
-        int len = height.length;
-        for (int i = 0; i < len; i++) {
-            while (stack.size() > 0 && height[i] > height[stack.getFirst()]) {
-                if (stack.size() < 2) {
-                    while (stack.size() > 0) {
-                        stack.removeFirst();
-                    }
-                } else {
-                    // 从栈中弹出两个数
-                    int rightIndex = stack.removeFirst();
-                    int leftIndex = stack.removeFirst();
-                    sum += (i - leftIndex - 1) * (Math.min(height[i], height[leftIndex]) - height[rightIndex]); // 计算面积：宽*高
-                    // 压入新的最高高度的下标
-                    stack.addFirst(height[leftIndex] >= height[rightIndex] ? leftIndex : rightIndex);
-                }
-            }
-            stack.addFirst(i);
-            System.out.println("stack = " + stack.toString() + " sum = " + sum);
+  /**
+   * 单调栈
+   * trap() 和 trap2() 是同一种解法
+   *
+   * @param height 每个宽度为 1 的柱子的高度数组
+   * @return 能接的雨水的量
+   */
+  public int trap(int[] height) {
+    int sum = 0;
+    LinkedList<Integer> stack = new LinkedList<>(); // 栈中存放的是下标
+    int len = height.length;
+    for (int i = 0; i < len; i++) {
+      while (stack.size() > 0 && height[i] > height[stack.getFirst()]) {
+        if (stack.size() < 2) {
+          while (stack.size() > 0) {
+            stack.removeFirst();
+          }
+        } else {
+          // 从栈中弹出两个数
+          int rightIndex = stack.removeFirst();
+          int leftIndex = stack.removeFirst();
+          sum += (i - leftIndex - 1) * (Math.min(height[i], height[leftIndex]) - height[rightIndex]); // 计算面积：宽*高
+          // 压入新的最高高度的下标
+          stack.addFirst(height[leftIndex] >= height[rightIndex] ? leftIndex : rightIndex);
         }
-        return sum;
+      }
+      stack.addFirst(i);
+      System.out.println("stack = " + stack.toString() + " sum = " + sum);
     }
+    return sum;
+  }
+
+  /**
+   * 单调栈
+   * time: O(n);    space: O(n)
+   *
+   * @param height 每个宽度为 1 的柱子的高度数组
+   * @return 能接的雨水的量
+   */
+  public int trap2(int[] height) {
+    int areas = 0;
+    LinkedList<Integer> stack = new LinkedList<>();  // 存放下标
+    int index = 0;
+    while (index < height.length) {
+      // 入栈
+      if (stack.isEmpty() || height[index] < height[stack.peek()]) {
+        stack.push(index++);
+      } else if (height[index] == height[stack.peek()] || stack.size() < 2) {
+        stack.pop();
+        stack.push(index++);
+      } else {
+        // 出栈1个数，计算面积
+        int low = stack.pop();
+        int h = Math.min(height[index], height[stack.peek()]) - height[low];
+        int c = index - stack.peek() - 1;
+        areas += h * c;
+      }
+    }
+    return areas;
+  }
 }

@@ -24,14 +24,26 @@ class code_0042Test extends code_0042 {
     int expected2 = 9;
 
     @Test
-    void testInsert() {
+    void testInsert11() {
         System.out.println("intervals = " + Arrays.toString(height1));
         Assertions.assertEquals(expected1, trap(height1));
     }
 
     @Test
-    void testInsert2() {
+    void testInsert12() {
         System.out.println("intervals = " + Arrays.toString(height2));
         Assertions.assertEquals(expected2, trap(height2));
+    }
+
+    @Test
+    void testInsert21() {
+        System.out.println("intervals = " + Arrays.toString(height1));
+        Assertions.assertEquals(expected1, trap2(height1));
+    }
+
+    @Test
+    void testInsert22() {
+        System.out.println("intervals = " + Arrays.toString(height2));
+        Assertions.assertEquals(expected2, trap2(height2));
     }
 }
