@@ -19,34 +19,64 @@ import java.util.Arrays;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0059 {
-    /**
-     * @param n 整数
-     * @return 螺旋矩阵
-     */
-    public int[][] generateMatrix(int n) {
-        int[][] res = new int[n][n];
-        int left = 0, right = n - 1;
-        int num = 1;
-        while (left <= right) {
-            for (int col = left; col < right; col++) {
-                res[left][col] = num++;
-            }
-            for (int row = left; row < right; row++) {
-                res[row][right] = num++;
-            }
-            for (int col = right; col > left; col--) {
-                res[right][col] = num++;
-            }
-            for (int row = right; row > left; row--) {
-                res[row][left] = num++;
-            }
-            left++;
-            right--;
-        }
-        if (n % 2 == 1) {
-            res[n / 2][n / 2] = num;
-        }
-        System.out.println(Arrays.deepToString(res));
-        return res;
+  /**
+   * @param n 整数
+   * @return 螺旋矩阵
+   */
+  public int[][] generateMatrix31(int n) {
+    int[][] array = new int[n][n];
+    int min = 0, max = n - 1, k = 1;
+    // 每次循环填空白的最外一圈
+    while (min < max) {
+      for (int i = min; i < max; i++) {
+        array[min][i] = k++;
+      }
+      for (int i = min; i < max; i++) {
+        array[i][max] = k++;
+      }
+      for (int i = max; i > min; i--) {
+        array[max][i] = k++;
+      }
+      for (int i = max; i > min; i--) {
+        array[i][min] = k++;
+      }
+      min++;
+      max--;
     }
+    if (min == max) {
+      array[min][max] = k;
+    }
+    return array;
+  }
+
+  /**
+   * @param n 整数
+   * @return 螺旋矩阵
+   */
+  public int[][] generateMatrix(int n) {
+    int[][] res = new int[n][n];
+    int left = 0, right = n - 1;
+    int num = 1;
+    while (left <= right) {
+      for (int max = left; max < right; max++) {
+        res[left][max] = num++;
+      }
+      for (int min = left; min < right; min++) {
+        res[min][right] = num++;
+      }
+      for (int max = right; max > left; max--) {
+        res[right][max] = num++;
+      }
+      for (int min = right; min > left; min--) {
+        res[min][left] = num++;
+      }
+      left++;
+      right--;
+    }
+    if (n % 2 == 1) {
+      res[n / 2][n / 2] = num;
+    }
+    System.out.println(Arrays.deepToString(res));
+    return res;
+  }
 }
