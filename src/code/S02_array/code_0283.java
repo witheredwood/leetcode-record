@@ -18,16 +18,31 @@ package code.S02_array;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0283 {
-    /**
-     * @param nums 给定的数组
-     */
-    public void moveZeroes(int[] nums) {
-        int left = 0;
-        for (int right = 0; right < nums.length; right++) {
-            if (nums[right] != 0) {
-                nums[left++] = nums[right];
-            }
-        }
-        while (left < nums.length) nums[left++] = 0;
+  /**
+   * 给定的数组包含正数和负数
+   *
+   * @param nums 给定的数组
+   */
+  public void moveZeroes31(int[] nums) {
+    int index = 0;
+    for (int oldPoint = 0; oldPoint < nums.length; oldPoint++) {
+      if (nums[oldPoint] != 0) {  // 非0则复制
+        nums[index++] = nums[oldPoint];
+      }
     }
+    while (index < nums.length) nums[index++] = 0;
+  }
+
+  /**
+   * @param nums 给定的数组
+   */
+  public void moveZeroes(int[] nums) {
+    int left = 0;
+    for (int right = 0; right < nums.length; right++) {
+      if (nums[right] != 0) {
+        nums[left++] = nums[right];
+      }
+    }
+    while (left < nums.length) nums[left++] = 0;
+  }
 }
