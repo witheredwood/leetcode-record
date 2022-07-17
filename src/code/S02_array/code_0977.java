@@ -21,41 +21,67 @@ import java.util.Arrays;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0977 {
-    /**
-     * 排序。时间复杂度 O(nlogn + n)
-     *
-     * @param nums 给定的数组
-     * @return 平方后排序的数组
-     */
-    public int[] sortedSquares(int[] nums) {
-        int len = nums.length;
-        // 平方
-        for (int i = 0; i < len; i++) {
-            nums[i] *= nums[i];
-        }
-        // 排序
-        Arrays.sort(nums);
-        System.out.println("sorted nums = " + Arrays.toString(nums));
-        return nums;
+  /**
+   * 双指针法
+   * time: O(n);    space: O(n)
+   *
+   * @param nums 给定的数组
+   * @return 平方后排序的数组
+   */
+  public int[] sortedSquares31(int[] nums) {
+    // 求平方
+    for (int i = 0; i < nums.length; i++) {
+      nums[i] = nums[i] * nums[i];
     }
+    // 排序。双指针从两端，每次取较大的一个
+    int[] result = new int[nums.length];
+    int index = result.length - 1;
+    int left = 0, right = nums.length - 1;
+    while (left <= right) {
+      if (nums[right] >= nums[left]) {
+        result[index--] = nums[right--];
+      } else {
+        result[index--] = nums[left++];
+      }
+    }
+    return result;
+  }
 
-    /**
-     * 空间换时间。时间复杂度 O(n)，空间复杂度 O(n)
-     *
-     * @param nums 给定的数组
-     * @return 平方后排序的数组
-     */
-    public int[] sortedSquares2(int[] nums) {
-        int len = nums.length;
-        for (int i = 0; i < len; i++) {
-            nums[i] *= nums[i];
-        }
-        int left = 0, right = len - 1;
-        int[] res = new int[len];
-        int index = len - 1;
-        // 从数组两端向中间，逐一比较，大者放res数组后面
-        while (left <= right) res[index--] = nums[left] > nums[right] ? nums[left++] : nums[right--];
-        System.out.println("sorted nums = " + Arrays.toString(res));
-        return res;
+  /**
+   * 排序。时间复杂度 O(nlogn + n)
+   *
+   * @param nums 给定的数组
+   * @return 平方后排序的数组
+   */
+  public int[] sortedSquares(int[] nums) {
+    int len = nums.length;
+    // 平方
+    for (int i = 0; i < len; i++) {
+      nums[i] *= nums[i];
     }
+    // 排序
+    Arrays.sort(nums);
+    System.out.println("sorted nums = " + Arrays.toString(nums));
+    return nums;
+  }
+
+  /**
+   * 空间换时间。时间复杂度 O(n)，空间复杂度 O(n)
+   *
+   * @param nums 给定的数组
+   * @return 平方后排序的数组
+   */
+  public int[] sortedSquares2(int[] nums) {
+    int len = nums.length;
+    for (int i = 0; i < len; i++) {
+      nums[i] *= nums[i];
+    }
+    int left = 0, right = len - 1;
+    int[] res = new int[len];
+    int index = len - 1;
+    // 从数组两端向中间，逐一比较，大者放res数组后面
+    while (left <= right) res[index--] = nums[left] > nums[right] ? nums[left++] : nums[right--];
+    System.out.println("sorted nums = " + Arrays.toString(res));
+    return res;
+  }
 }
