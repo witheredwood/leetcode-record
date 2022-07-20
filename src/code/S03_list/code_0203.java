@@ -20,42 +20,62 @@ package code.S03_list;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0203 {
-    /**
-     * @param head 链表头结点
-     * @param val  整数
-     * @return 删除整数 val 之后的链表头结点
-     */
-    public ListNode removeElements(ListNode head, int val) {
-        if (head == null) return head;
-        ListNode dummy = new ListNode(-1, head);  // 设置虚节点
-        System.out.println("node = " + dummy.val + " head = " + dummy.next.val);
-        ListNode p = dummy;
-        while (p != null && p.next != null) {
-            if (val == p.next.val) {
-                p.next = p.next.next;
-            } else {
-                p = p.next;
-            }
-        }
-        return dummy.next;
+  /**
+   * 删除链表元素
+   * time: O(n);    space: O(1)
+   *
+   * @param head 链表头结点
+   * @param val  整数
+   * @return 删除整数 val 之后的链表头结点
+   */
+  public ListNode removeElements31(ListNode head, int val) {
+    ListNode dummy = new ListNode(0, head);
+    for (ListNode pre = dummy, cur = dummy.next; cur != null; cur = cur.next) {
+      if (val == cur.val) {
+        pre.next = cur.next;
+      } else {
+        pre = pre.next;
+      }
     }
+    return dummy.next;
+  }
 
-    /**
-     * @param head 链表头结点
-     * @param val  整数
-     * @return 删除整数 val 之后的链表头结点
-     */
-    public ListNode removeElements2(ListNode head, int val) {
-        if (head == null) return head;
-        ListNode dummy = new ListNode(-1, head);  // 设置虚节点
-        System.out.println("node = " + dummy.val + " head = " + dummy.next.val);
-        for (ListNode pre = dummy, cur = head; cur != null; cur = cur.next) {
-            if (val == cur.val) {
-                pre.next = cur.next;
-            } else {
-                pre = pre.next;
-            }
-        }
-        return dummy.next;
+  /**
+   * @param head 链表头结点
+   * @param val  整数
+   * @return 删除整数 val 之后的链表头结点
+   */
+  public ListNode removeElements(ListNode head, int val) {
+    if (head == null) return head;
+    ListNode dummy = new ListNode(-1, head);  // 设置虚节点
+    System.out.println("node = " + dummy.val + " head = " + dummy.next.val);
+    ListNode p = dummy;
+    while (p != null && p.next != null) {
+      if (val == p.next.val) {
+        p.next = p.next.next;
+      } else {
+        p = p.next;
+      }
     }
+    return dummy.next;
+  }
+
+  /**
+   * @param head 链表头结点
+   * @param val  整数
+   * @return 删除整数 val 之后的链表头结点
+   */
+  public ListNode removeElements2(ListNode head, int val) {
+    if (head == null) return head;
+    ListNode dummy = new ListNode(-1, head);  // 设置虚节点
+    System.out.println("node = " + dummy.val + " head = " + dummy.next.val);
+    for (ListNode pre = dummy, cur = head; cur != null; cur = cur.next) {
+      if (val == cur.val) {
+        pre.next = cur.next;
+      } else {
+        pre = pre.next;
+      }
+    }
+    return dummy.next;
+  }
 }
