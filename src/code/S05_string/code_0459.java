@@ -22,18 +22,30 @@ package code.S05_string;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0459 {
-    /**
-     * 构造新字符串，区分出s有重复子串和没有重复子串的不同
-     *
-     * @param s 字符串
-     * @return 是否有一个可重复的子串
-     */
-    public boolean repeatedSubstringPattern(String s) {
-        String t = s + s;  // t 一定有重复的子串s
-        // 从t的第二个字符开始查找s，如果s有重复的子串，那么查到的是s的第二个子串开始
-        // 如果s没有重复的子串，那么查到的是第二个s的下标
-        int index = t.indexOf(s, 1);
-        if (index == s.length()) return false;
-        return true;
-    }
+  /**
+   * time: O(n);      space: O(1)
+   *
+   * @param s 字符串
+   * @return 字符串是否由一个子串重复多次构成
+   */
+  public boolean repeatedSubstringPattern31(String s) {
+    String t = (s + s).substring(1, s.length() * 2 - 1);
+    int index = t.indexOf(s);
+    return index != -1;
+  }
+
+  /**
+   * 构造新字符串，区分出s有重复子串和没有重复子串的不同
+   *
+   * @param s 字符串
+   * @return 是否有一个可重复的子串
+   */
+  public boolean repeatedSubstringPattern(String s) {
+    String t = s + s;  // t 一定有重复的子串s
+    // 从t的第二个字符开始查找s，如果s有重复的子串，那么查到的是s的第二个子串开始
+    // 如果s没有重复的子串，那么查到的是第二个s的下标
+    int index = t.indexOf(s, 1);
+    if (index == s.length()) return false;
+    return true;
+  }
 }
