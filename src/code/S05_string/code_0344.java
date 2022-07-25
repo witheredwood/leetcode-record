@@ -24,16 +24,30 @@ import java.util.Arrays;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0344 {
-    /**
-     * @param s 字符串
-     */
-    public void reverseString(char[] s) {
-        char t;
-        for (int i = 0, j = s.length - 1; i < j; i++, j--) {
-            t = s[i];
-            s[i] = s[j];
-            s[j] = t;
-        }
-        System.out.println("s = " + Arrays.toString(s));
+  /**
+   * time: O(n);      space: O(1)
+   *
+   * @param s 字符数组
+   */
+  public void reverseString31(char[] s) {
+    for (int i = 0, j = s.length - 1; i < j; i++, j--) {
+      char c = s[i];
+      s[i] = s[j];
+      s[j] = c;
     }
+  }
+
+
+  /**
+   * @param s 字符串
+   */
+  public void reverseString(char[] s) {
+    char t;
+    for (int i = 0, j = s.length - 1; i < j; i++, j--) {
+      t = s[i];
+      s[i] = s[j];
+      s[j] = t;
+    }
+    System.out.println("s = " + Arrays.toString(s));
+  }
 }
