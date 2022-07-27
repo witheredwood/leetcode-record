@@ -1,5 +1,6 @@
 package code.S07_tree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,6 +28,36 @@ import java.util.List;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0102 {
+    /**
+     * 层次遍历
+     * time: O(n);       space: O(n)
+     *
+     * @param root 二叉树根节点
+     * @return 二叉树层次遍历中每层的节点
+     */
+    public List<List<Integer>> levelOrder31(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        if (root != null) queue.offer(root);
+        TreeNode last = queue.isEmpty() ? null : queue.getLast();   // 当前层的最后一个节点
+        List<Integer> curLayer = new ArrayList<>();   // 存放当前层的所有值
+        while (!queue.isEmpty()) {
+            TreeNode cur = queue.poll();  // 当前遍历的节点
+            // 该值加入当前层
+            curLayer.add(cur.val);
+            // 加入下一层节点
+            if (cur.left != null) queue.offer(cur.left);
+            if (cur.right != null) queue.offer(cur.right);
+            // 当前节点是否是该层最后一个节点
+            if (cur == last) {
+                if (!queue.isEmpty()) last = queue.getLast();
+                result.add(new ArrayList<>(curLayer));
+                curLayer.clear();
+            }
+        }
+        return result;
+    }
+
     /**
      * 层次遍历
      *
