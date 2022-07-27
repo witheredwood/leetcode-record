@@ -4,7 +4,9 @@ import java.util.LinkedList;
 
 /**
  * 316. 去除重复字母
- * 给你一个字符串 s ，请你去除字符串中重复的字母，使得每个字母只出现一次。需保证 返回结果的字典序最小（要求不能打乱其他字符的相对位置）。
+ * <p>
+ * 给你一个字符串 s ，请你去除字符串中重复的字母，使得每个字母只出现一次。
+ * 需保证 返回结果的字典序最小（要求不能打乱其他字符的相对位置）。
  * <p>
  * 示例 1：
  * 输入：s = "bcabc"
@@ -12,10 +14,9 @@ import java.util.LinkedList;
  * 示例 2：
  * 输入：s = "cbacdcbc"
  * 输出："acdb"
- *  
  * <p>
  * 提示：
- * 1 <= s.length <= 104
+ * 1 <= s.length <= 10^4
  * s 由小写英文字母组成
  * <p>
  * 来源：力扣（LeetCode）
@@ -23,6 +24,39 @@ import java.util.LinkedList;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0316 {
+    /**
+     * 单调栈
+     * time: O(n);      space: O(k)     k是 字符串中不重复字符的个数
+     *
+     * @param s 字符串
+     * @return 最小字典序的不重复子串
+     */
+    public String removeDuplicateLetters31(String s) {
+        LinkedList<Character> stack = new LinkedList<>();  // 单调栈？？
+        for (int i = 0; i < s.length(); i++) {
+            char cur = s.charAt(i);
+            if (stack.isEmpty()) {  // 空栈直接压入当前字符 cur
+                stack.push(cur);
+            } else if (cur > stack.peek()) {  // 当前字符大于栈顶字符
+                if (!stack.contains(cur)) stack.push(cur);    // 如果栈中包含该字符
+            } else if (cur < stack.peek()) {  // 当前字符小于栈顶字符
+                if (stack.contains(cur)) continue;      // 如果栈中有当前字符 cur，肯定cur在前面的字典序小，cur 不用做任何处理
+                // 否则的话，栈顶字符大于cur的，并且之后会再次出现的字符，弹出栈
+                while (!stack.isEmpty() && cur < stack.peek() && s.substring(i + 1, s.length()).indexOf(stack.peek()) > -1) {
+                    stack.pop();
+                }
+                // 将当前字符 cur 入栈
+                stack.push(cur);
+            }
+        }
+        // 获取最终的结果字符串
+        StringBuilder builder = new StringBuilder();
+        for (char c : stack) {
+            builder.insert(0, c);
+        }
+        return builder.toString();
+    }
+
     /**
      * @param s 字符串
      * @return 最小字典序的不重复子串
