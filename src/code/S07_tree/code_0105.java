@@ -32,6 +32,28 @@ public class code_0105 {
      * @param inorder  中序遍历
      * @return 构造的二叉树的根节点
      */
+    public TreeNode buildTree31(int[] preorder, int[] inorder) {
+        return build(preorder, 0, preorder.length, inorder, 0, inorder.length);
+    }
+
+    private TreeNode build(int[] preorder, int low1, int high1, int[] inorder, int low2, int high2) {
+        if (low1 == high1) return null;
+        TreeNode root = new TreeNode(preorder[low1]);
+        int pos = low2;  // 根节点在中序中的下标
+        while (pos < high2 && root.val != inorder[pos]) pos++;
+        int leftCount = pos - low2;
+        // 递归左子树
+        root.left = build(preorder, low1 + 1, low1 + leftCount + 1, inorder, low2, pos);
+        // 递归右子树
+        root.right = build(preorder, low1 + leftCount + 1, high1, inorder, pos + 1, high2);
+        return root;
+    }
+
+    /**
+     * @param preorder 前序遍历
+     * @param inorder  中序遍历
+     * @return 构造的二叉树的根节点
+     */
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         TreeNode root = buildSubTree(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
         return root;
