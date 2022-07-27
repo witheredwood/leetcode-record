@@ -22,13 +22,14 @@ package code.S07_tree;
  */
 public class code_0101 {
     /**
+     * time: O(n);      space: O(n)  递归使用的栈空间
+     *
      * @param root 二叉树根节点
      * @return 二叉树是否是对称的
      */
     public boolean isSymmetric(TreeNode root) {
-        TreeNode leftRoot = root.left, rightRoot = root.right;
         // 比较根节点的左右两个子树是不是对称的
-        return compare(leftRoot, rightRoot);
+        return compareSymmetric(root.left, root.right);
     }
 
     /**
@@ -36,15 +37,10 @@ public class code_0101 {
      * @param root2 第二个节点
      * @return 以 root1，root2 为根节点的两棵二叉树是否是对称的
      */
-    public boolean compare(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null)
-            return true;
-        if (root1 == null || root2 == null)
-            return false;
-        if (root1.val != root2.val)
-            return false;
-        boolean l = compare(root1.left, root2.right);
-        boolean r = compare(root1.right, root2.left);
-        return l && r;
+    private boolean compareSymmetric(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) return true;
+        if (root1 == null || root2 == null) return false;
+        if (root1.val != root2.val) return false;
+        return compareSymmetric(root1.left, root2.right) && compareSymmetric(root1.right, root2.left);
     }
 }
