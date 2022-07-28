@@ -27,6 +27,26 @@ package code.S07_tree;
  */
 public class code_0110 {
     /**
+     * time: O(n);      space: O(n)
+     *
+     * @param root 二叉树根节点
+     * @return 是不是高度平衡的二叉树
+     */
+    public boolean isBalanced31(TreeNode root) {
+        return getHeight(root) != -1;
+    }
+
+    private int getHeight(TreeNode root) {
+        if (root == null) return 0;
+        int l = 0, r = 0;
+        if (root.left != null) l = getHeight(root.left);
+        if (l == -1) return -1;
+        if (root.right != null) r = getHeight(root.right);
+        if (r == -1) return -1;
+        return Math.abs(l - r) > 1 ? -1 : Math.max(l, r) + 1;
+    }
+
+    /**
      * @param root 二叉树根节点
      * @return 是不是高度平衡的二叉树
      */
@@ -40,7 +60,7 @@ public class code_0110 {
         if (root == null) return 0;
         int l = 0, r = 0;
         if (root.left != null) l = height(root.left);
-        if (root.right != null)  r =height(root.right);
+        if (root.right != null) r = height(root.right);
         // 判断高度差
         if (l == -1 || r == -1 || Math.abs(l - r) > 1) return -1; // 标记不符合规则
         return Math.max(l, r) + 1;
