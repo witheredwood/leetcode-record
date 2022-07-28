@@ -13,26 +13,26 @@ public class traverse {
      * 前序遍历
      */
     public List<Integer> orderByPre(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        if (root != null) {
-            preOrder(root, list);
-        }
-        System.out.println("pre: " + list);
-        return list;
+        List<Integer> resultList = new LinkedList<>();
+        if (root == null) return resultList;
+        preorder(root, resultList);
+        System.out.println("pre: " + resultList);
+        return resultList;
     }
 
     /**
+     * 前序 — 递归
+     *
      * @param root 根节点
      * @param list 存储值的列表
      */
-    public void preOrder(TreeNode root, List<Integer> list) {
-        if (root == null)
-            return;
+    public void preorder(TreeNode root, List<Integer> list) {
+        if (root == null) return;
         list.add(root.val); // 处理节点
-        if (root.left != null)
-            preOrder(root.left, list);
-        if (root.right != null)
-            preOrder(root.right, list);
+        // 遍历左子树
+        if (root.left != null) preorder(root.left, list);
+        // 遍历右子树
+        if (root.right != null) preorder(root.right, list);
     }
 
     /**
@@ -88,22 +88,22 @@ public class traverse {
     }
 
     /**
-     * 前序遍历（迭代）
+     * 前序遍历 — 迭代
      */
-    public List<Integer> orderByPreIter(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
+    public List<Integer> preorderByIter(TreeNode root) {
+        List<Integer> resultList = new ArrayList<>();
         LinkedList<TreeNode> stack = new LinkedList<>();
-        stack.add(root);
-        while (stack.size() > 0) {
-            TreeNode top = stack.removeLast(); // 弹出
-            list.add(top.val); // 处理节点
-            if (top.right != null)
-                stack.add(top.right); // 加入右孩子
-            if (top.left != null)
-                stack.add(top.left); // 加入左孩子
+        if (root != null) stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode top = stack.pop(); // 弹出
+            resultList.add(top.val); // 处理节点
+            // 加入右子树
+            if (top.right != null) stack.push(top.right);
+            // 加入左子树
+            if (top.left != null) stack.push(top.left);
         }
-        System.out.println("pre iter: " + list);
-        return list;
+        System.out.println("pre iter: " + resultList);
+        return resultList;
     }
 
     /**
@@ -149,8 +149,9 @@ public class traverse {
     }
 
     /**
-     * 
-     * @return
+     * 层次遍历
+     *
+     * @return 层次遍历的结果
      */
     public List<Integer> layer(TreeNode root) {
         List<Integer> list = new LinkedList<>();
@@ -196,7 +197,7 @@ public class traverse {
         list = tra.orderByPost(root); // 后序遍历
         // 迭代
         System.out.println("---------------------");
-        list = tra.orderByPreIter(root); // 前序遍历
+        list = tra.preorderByIter(root); // 前序遍历
         System.out.println("---------------------");
         list = tra.orderByInIter(root); // 中序遍历
         System.out.println("---------------------");
