@@ -29,6 +29,41 @@ import java.util.List;
  */
 public class code_0235 {
     /**
+     * 迭代法
+     * time: O(n);     space: O(n)
+     *
+     * @param root 二叉搜索树的根节点
+     * @param p    第一个结点
+     * @param q    第二个结点
+     * @return 两个结点的最近公共祖先
+     */
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode> list1 = getPath(root, p);
+        List<TreeNode> list2 = getPath(root, q);
+        int index = 0;
+        while (index < list1.size() && index < list2.size() && list1.get(index).val == list2.get(index).val)
+            index++;
+        return list1.get(index - 1);
+    }
+
+    /**
+     * @param root   二叉搜索树的根节点
+     * @param target 要查找的目标结点
+     * @return 存放路径
+     */
+    private List<TreeNode> getPath(TreeNode root, TreeNode target) {
+        List<TreeNode> result = new LinkedList<>();
+        if (root == null) return result;
+        TreeNode cur = root;
+        while (cur.val != target.val) {
+            result.add(cur);
+            cur = target.val < cur.val ? cur.left : cur.right;
+        }
+        result.add(cur);
+        return result;
+    }
+
+    /**
      * 递归法
      *
      * @param root 二叉搜索树的根节点
@@ -73,41 +108,5 @@ public class code_0235 {
         boolean r = bk(cur.right, target, list, path);
         path.removeLast();
         return r;
-    }
-
-    /**
-     * 迭代法
-     *
-     * @param root 二叉搜索树的根节点
-     * @param p    第一个结点
-     * @param q    第二个结点
-     * @return 两个结点的最近公共祖先
-     */
-    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
-        List<TreeNode> list1 = new LinkedList<>();
-        List<TreeNode> list2 = new LinkedList<>();
-        findNode(root, p, list1);
-        findNode(root, q, list2);
-        TreeNode f = root;
-        for (int i = 0; i < list1.size() && i < list2.size(); i++) {
-            if (list1.get(i).val == list2.get(i).val) {
-                f = list1.get(i);
-            }
-        }
-        return f;
-    }
-
-    /**
-     * @param root   二叉搜索树的根节点
-     * @param target 要查找的目标结点
-     * @param list   存放路径
-     */
-    public void findNode(TreeNode root, TreeNode target, List<TreeNode> list) {
-        TreeNode cur = root;
-        while (cur.val != target.val) {
-            list.add(cur);
-            cur = target.val < cur.val ? cur.left : cur.right;
-        }
-        list.add(cur);
     }
 }
