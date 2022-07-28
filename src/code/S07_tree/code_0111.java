@@ -17,7 +17,7 @@ import java.util.LinkedList;
  * 输出：5
  * <p>
  * 提示：
- * 树中节点数的范围在 [0, 105] 内
+ * 树中节点数的范围在 [0, 10^5] 内
  * -1000 <= Node.val <= 1000
  * <p>
  * 来源：力扣（LeetCode）
@@ -25,6 +25,29 @@ import java.util.LinkedList;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0111 {
+    /**
+     * @param root 二叉树根节点
+     * @return 二叉树的最小深度
+     */
+    public int minDepth31(TreeNode root) {
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        if (root != null) queue.offer(root);
+        TreeNode last = queue.isEmpty() ? null : queue.getLast();
+        int height = queue.isEmpty() ? 0 : 1;
+        while (!queue.isEmpty()) {
+            TreeNode curNode = queue.poll();
+            // 遍历到第一个叶子节点，跳出循环
+            if (curNode.left == null && curNode.right == null) break;
+            if (curNode.left != null) queue.offer(curNode.left);
+            if (curNode.right != null) queue.offer(curNode.right);
+            if (curNode == last) {
+                height++;
+                if (!queue.isEmpty()) last = queue.getLast();
+            }
+        }
+        return height;
+    }
+
     /**
      * 递归解法
      * 只能搜索到叶子节点，如果搜索到空节点，则会导致单只树出错
