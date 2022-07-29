@@ -34,34 +34,67 @@ package code.S07_tree;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0450 {
-	/**
-	 * @param root 二叉搜索树的根节点
-	 * @param key  要删除的节点的值
-	 * @return 删除节点后的二叉搜索树的根节点
-	 */
-	public TreeNode deleteNode(TreeNode root, int key) {
-		TreeNode newRoot = new TreeNode(0);
-		newRoot.left = root;
-		TreeNode pre = newRoot, delete = root;
-		// 找到被删除节点的父节点
-		while (delete != null) {
-			if (delete.val == key) break;
-			pre = delete;
-			delete = delete.val < key ? delete.right : delete.left;
-		}
-		// 没找到
-		if (delete == null) return root;
-		// 没有右子树
-		if (delete.right == null) {
-			if (delete == pre.left) pre.left = delete.left;
-			else pre.right = delete.left;
-		} else {
-			TreeNode p = delete.right, q = delete;
-			for (; p.left != null; q = p, p = p.left) ;
-			delete.val = p.val;
-			if (p == delete.right) q.right = p.right;
-			else q.left = p.right;
-		}
-		return newRoot.left;
-	}
+
+    /**
+     * @param root 二叉搜索树的根节点
+     * @param key  要删除的节点的值
+     * @return 删除节点后的二叉搜索树的根节点
+     */
+    public TreeNode deleteNode31(TreeNode root, int key) {
+        if (root == null) return root;
+        // 增加一个虚节点，其左子树为原子树的根节点
+        TreeNode dummy = new TreeNode(0, root, null);
+        TreeNode delete = root, pre = dummy;
+        // 1. 找要删除的节点
+        while (delete != null) {
+            if (key == delete.val) break;  // 找到了
+            pre = delete;
+            delete = key < delete.val ? delete.left : delete.right;
+        }
+        if (delete == null) return root;
+        // 删除当前节点
+        TreeNode newCur = null;
+        if (delete.right != null) {  // 找到右子树的最左边节点
+            TreeNode p = delete.right, q = delete;
+            for (; p.left != null; q = p, p = p.left) ;
+            delete.val = p.val;
+            if (q == delete) q.right = p.right;
+            else q.left = p.right;
+        } else {
+            if (delete == pre.left) pre.left = delete.left;
+            else pre.right = delete.left;
+        }
+        return dummy.left;
+    }
+
+    /**
+     * @param root 二叉搜索树的根节点
+     * @param key  要删除的节点的值
+     * @return 删除节点后的二叉搜索树的根节点
+     */
+    public TreeNode deleteNode(TreeNode root, int key) {
+        TreeNode newRoot = new TreeNode(0);
+        newRoot.left = root;
+        TreeNode pre = newRoot, delete = root;
+        // 找到被删除节点的父节点
+        while (delete != null) {
+            if (delete.val == key) break;
+            pre = delete;
+            delete = delete.val < key ? delete.right : delete.left;
+        }
+        // 没找到
+        if (delete == null) return root;
+        // 没有右子树
+        if (delete.right == null) {
+            if (delete == pre.left) pre.left = delete.left;
+            else pre.right = delete.left;
+        } else {
+            TreeNode p = delete.right, q = delete;
+            for (; p.left != null; q = p, p = p.left) ;
+            delete.val = p.val;
+            if (p == delete.right) q.right = p.right;
+            else q.left = p.right;
+        }
+        return newRoot.left;
+    }
 }
