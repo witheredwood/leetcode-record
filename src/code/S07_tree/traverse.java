@@ -110,17 +110,17 @@ public class traverse {
      * 中序遍历 — 迭代
      */
     public List<Integer> inorderByIter(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = new LinkedList<>();
         LinkedList<TreeNode> stack = new LinkedList<>();
-        TreeNode cur = root; // 当前访问的节点
-        while (cur != null || stack.size() > 0) {
-            if (cur != null) { // 当前访问节点，访问到最底层
-                stack.add(cur); // 当前节点不为空，则将该节点加入到栈中
-                cur = cur.left;
+        TreeNode curNode = root; // 当前访问的节点
+        while (curNode != null || !stack.isEmpty()) {
+            if (curNode != null) { // 当前访问节点，访问到最底层
+                stack.add(curNode); // 当前节点不为空，则将该节点加入到栈中
+                curNode = curNode.left;
             } else {
-                cur = stack.removeLast(); // 弹出，获取新的节点
-                list.add(cur.val); // 处理节点
-                cur = cur.right;
+                curNode = stack.pop(); // 弹出，获取新的节点
+                list.add(curNode.val); // 处理节点
+                curNode = curNode.right;
             }
         }
         System.out.println("in iter: " + list);
