@@ -36,6 +36,28 @@ package code.S09_greedy;
  */
 public class code_0122 {
     /**
+     * 贪心：当前的状态和利润和以前的状态无关
+     * 卖出则买入
+     * time: O(n);      space: O(1)
+     *
+     * @param prices 整数数组
+     * @return 最大利润
+     */
+    public int maxProfit31(int[] prices) {
+        int buy = prices[0];    // 初始买入第一天的股票
+        int profit = 0;  // 初始利润为0 = sell - buy
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < buy) {  // 重新买入
+                buy = prices[i];
+            } else if (prices[i] > buy) {      // 有利润则卖出
+                profit += prices[i] - buy;     // 计算当天卖出的利润
+                buy = prices[i];     // 买入当天的股票
+            }
+        }
+        return profit;
+    }
+
+    /**
      * @param prices 正整数数组
      * @return 最大利润
      */
