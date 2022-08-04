@@ -3,7 +3,7 @@ package code.S10_dynamic_programming;
 /**
  * 62. 不同路径
  * <p>
- * 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。
+ * 一个机器人位于一个 m x n网格的左上角 （起始点在下图中标记为 “Start” ）。
  * 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。
  * 问总共有多少条不同的路径？
  * <p>
@@ -25,12 +25,37 @@ package code.S10_dynamic_programming;
  * 输入：m = 3, n = 3
  * 输出：6
  * <p>
- * <p>
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/unique-paths
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0062 {
+
+    /**
+     * time:(m*n);     space: O(m*n)
+     *
+     * @param m 二维数组的行数
+     * @param n 二维数组的列数
+     * @return 从 [0,0] 到 [m-1,n-1] 有多少条路径
+     */
+    public int uniquePaths31(int m, int n) {
+        int[][] paths = new int[m][n];
+        // 初始化
+        for (int i = 0; i < n; i++) {
+            paths[0][i] = 1;
+        }
+        for (int i = 0; i < m; i++) {
+            paths[i][0] = 1;
+        }
+        // 求其他路径数
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                paths[i][j] = paths[i - 1][j] + paths[i][j - 1];
+            }
+        }
+        return paths[m - 1][n - 1];
+    }
+
     /**
      * 递归
      * 时间复杂度太大，需要优化
