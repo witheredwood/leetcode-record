@@ -16,7 +16,7 @@ import java.util.*;
  * 示例 3：
  * 输入：nums = [1]
  * 输出：[[1]]
- *  
+ * <p>
  * 提示：
  * 1 <= nums.length <= 6
  * -10 <= nums[i] <= 10
@@ -27,6 +27,30 @@ import java.util.*;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0046 {
+    /**
+     * @param nums 整数数组
+     * @return 所有可能的全排列
+     */
+    public List<List<Integer>> permute31(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> path = new LinkedList<>();
+        backtracking(nums, path, result);
+        return result;
+    }
+
+    private void backtracking(int[] nums, LinkedList<Integer> path, List<List<Integer>> result) {
+        if (path.size() == nums.length) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (path.contains(nums[i])) continue;
+            path.add(nums[i]);
+            backtracking(nums, path, result);
+            path.removeLast();
+        }
+    }
+
     /**
      * 回溯
      *
