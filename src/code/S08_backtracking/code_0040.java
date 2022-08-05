@@ -5,12 +5,12 @@ import java.util.*;
 /**
  * 40.组合总和II
  * <p>
- * 给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
- * candidates 中的每个数字在每个组合中只能使用一次。
- * 注意：解集不能包含重复的组合。 
+ * 给定一个数组candidates和一个目标数target，找出candidates中所有可以使数字和为target的组合。
+ * candidates中的每个数字在每个组合中只能使用一次。
+ * 注意：解集不能包含重复的组合。
  * <p>
- * 示例 1:
- * 输入: candidates = [10,1,2,7,6,1,5], target = 8,
+ * 示例1:
+ * 输入: candidates =[10,1,2,7,6,1,5], target =8,
  * 输出:
  * [
  * [1,1,6],
@@ -18,8 +18,8 @@ import java.util.*;
  * [1,7],
  * [2,6]
  * ]
- * 示例 2:
- * 输入: candidates = [2,5,2,1,2], target = 5,
+ * 示例2:
+ * 输入: candidates =[2,5,2,1,2], target =5,
  * 输出:
  * [
  * [1,2,2],
@@ -31,6 +31,33 @@ import java.util.*;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0040 {
+    /**
+     * @param candidates 无重复元素 的整数数组
+     * @param target     整数
+     * @return 组成目标数的所有组合
+     */
+    public List<List<Integer>> combinationSum231(int[] candidates, int target) {
+        Arrays.sort(candidates);    // 升序
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> path = new LinkedList<>();
+        backtracking(candidates, 0, 0, target, path, result);
+        return result;
+    }
+
+    private void backtracking (int[] candidates, int index, int sum, int target, LinkedList<Integer> path, List<List<Integer>> result) {
+        if (sum == target) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = index; i < candidates.length; i++) {
+            if (i > index && candidates[i] == candidates[i - 1]) continue;
+            if (sum + candidates[i] > target) break;  // 后续的值不需要遍历
+            path.add(candidates[i]);
+            backtracking(candidates, i + 1, sum + candidates[i], target, path, result);
+            path.removeLast();
+        }
+    }
+
     /**
      * 回溯（使用全局变量保存结果）+ 排序
      *
