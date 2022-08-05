@@ -27,6 +27,32 @@ import java.util.*;
  */
 public class code_0047 {
     /**
+     * @param nums 一个序列，可包含重复数字
+     * @return 所有不重复的全排列
+     */
+    public List<List<Integer>> permuteUnique31(int[] nums) {
+        Set<List<Integer>> resultSet = new HashSet<>();  // 去重，去除不同路径但是组合相同的组合
+        LinkedList<Integer> path = new LinkedList<>();
+        boolean[] visited = new boolean[nums.length];    // 一条路径上的元素不重复
+        backtracking(nums, visited, path, resultSet);
+        return new LinkedList<>(resultSet);
+    }
+    private void backtracking(int[] nums, boolean[] visited, LinkedList<Integer> path, Set<List<Integer>> result) {
+        if (path.size() == nums.length) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (visited[i]) continue;     // 已访问过
+            visited[i] = true;
+            path.add(nums[i]);
+            backtracking(nums, visited, path, result);
+            path.removeLast();
+            visited[i] = false;
+        }
+    }
+
+    /**
      * 方案一：回溯（解决多层递归的问题） + 使用 list 存储符合条件的结果
      *
      * @param nums 一个序列，可包含重复数字
