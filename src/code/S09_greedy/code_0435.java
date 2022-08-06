@@ -32,6 +32,35 @@ import java.util.List;
  */
 public class code_0435 {
     /**
+     * time: O(nlogn);      space: O(1)
+     *
+     * @param intervals 区间的整数数组
+     * @return 移除几个区间后数组无重叠
+     */
+    public int eraseOverlapIntervals31(int[][] intervals) {
+        // 排序。按区间左端点升序排列，左端点相同时按区间右端点升序排列
+        Arrays.sort(intervals, (a, b) -> {
+            if (a[0] != b[0]) return a[0] - b[0];
+            return a[1] - b[1];
+        });
+        // 逻辑删除，pre 记录最后一个有效区间
+        int count = 0;
+        int[] pre = intervals[0];
+        for (int i = 1; i < intervals.length; i++) {
+            int[] cur = intervals[i];
+            if (cur[0] < pre[1]) {      // 有重叠，则删除右端点大的区间
+                if (cur[1] < pre[1]) {     // 更新有效区间的最后一个区间
+                    pre = cur;
+                }
+                count++;
+            } else {    // 无重叠
+                pre = cur;
+            }
+        }
+        return count;
+    }
+
+    /**
      * 排序+遍历。排序后移除有交集区间中长度较长的区间
      * 时间复杂度 O(nlogn + n)，空间复杂度 O(n)
      *
@@ -85,9 +114,9 @@ public class code_0435 {
         System.out.println("sort = " + Arrays.deepToString(intervals));
         // 记录当前的右边界以及不重叠区间的个数
         int count = 0, right = Integer.MIN_VALUE;
-        for (int[] point: intervals) {
+        for (int[] point : intervals) {
             // 两个区间没有交集
-            if (right <= point[0]){
+            if (right <= point[0]) {
                 count++;
                 right = point[1];
                 System.out.println("arr = " + Arrays.toString(point));
