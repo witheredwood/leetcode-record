@@ -1,9 +1,11 @@
 package code.S10_dynamic_programming;
 
+import java.util.Arrays;
+
 /**
  * 70. 爬楼梯
  * <p>
- * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+ * 假设你正在爬楼梯。需要 n阶你才能到达楼顶。
  * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
  * 注意：给定 n 是一个正整数。
  * <p>
@@ -26,6 +28,20 @@ package code.S10_dynamic_programming;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0070 {
+    /**
+     * @param n 楼梯总阶数
+     * @return 有多少中方法到达楼顶
+     */
+    public int climbStairs31(int n) {
+        int[] nums = new int[n + 1];
+        nums[1] = 1;
+        if (n > 1) nums[2] = 2;     // 因为 n 的取值是 [1, 45]
+        for (int i = 3; i <= n; i++) {
+            nums[i] = nums[i - 1] + nums[i - 2];
+        }
+        return nums[n];
+    }
+
     /**
      * 递归
      * 到达n阶的有两种方法： 到达（n-1）阶楼梯后爬1个台阶，到达（n-2）阶楼梯后爬2个台阶。
@@ -65,7 +81,7 @@ public class code_0070 {
 
     /**
      * 动态规划
-     *
+     * <p>
      * 时间复杂度 O(n)，空间复杂度 O(1)
      *
      * @param n 楼梯总阶数
