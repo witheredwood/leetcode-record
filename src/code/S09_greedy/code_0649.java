@@ -23,7 +23,8 @@ import java.util.*;
  * 示例 1：
  * 输入："RD"
  * 输出："Radiant"
- * 解释：第一个参议员来自 Radiant 阵营并且他可以使用第一项权利让第二个参议员失去权力，因此第二个参议员将被跳过因为他没有任何权利。然后在第二轮的时候，第一个参议员可以宣布胜利，因为他是唯一一个有投票权的人
+ * 解释：第一个参议员来自 Radiant 阵营并且他可以使用第一项权利让第二个参议员失去权力，因此第二个参议员将被跳过因为他没有任何权利。
+ * 然后在第二轮的时候，第一个参议员可以宣布胜利，因为他是唯一一个有投票权的人
  * 示例 2：
  * 输入："RDD"
  * 输出："Dire"
@@ -41,34 +42,53 @@ import java.util.*;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0649 {
-    public static void main(String[] args) {
-        String s1 = predictPartyVictory("RD");
-        System.out.println(s1);
-        System.out.println("---------------------");
-        String s2 = predictPartyVictory("RDD");
-        System.out.println(s2);
-        System.out.println("---------------------");
-        String s3 = predictPartyVictory("DDRRR");
-        System.out.println(s3);
+    /**
+     * @param senate 字符串
+     * @return 胜利队伍的名字
+     */
+    public String predictPartyVictory32(String senate) {
+        StringBuilder builder = new StringBuilder(senate);
+        int count = 0;  // > 0 时是 R 可以消除 D；< 0 时是 D 可以消除 R
+        int index = 0;
+        while (Math.abs(count) < builder.length()) {
+            if (builder.charAt(index) == 'R') {  // 当前是 R
+                if (count < 0) {      // 前面有 D 消除当前的 R
+                    builder.deleteCharAt(index);
+                } else {
+                    index++;
+                }
+                count++;
+            } else {     // 当前是 D
+                if (count > 0) {     // 前面有R 消除当前的D
+                    builder.deleteCharAt(index);
+                } else {
+                    index++;
+                }
+                count--;
+            }
+            if (index >= builder.length()) index = 0;
+        }
+        return 'R' == builder.charAt(0) ? "Radiant" : "Dire";
+    }
 
-//        String s1 = predictPartyVictory2("RD");
-//        System.out.println(s1);
-//        System.out.println("---------------------");
-//        String s2 = predictPartyVictory2("RDD");
-//        System.out.println(s2);
-//        System.out.println("---------------------");
-//        String s3 = predictPartyVictory2("DDRRR");
-//        System.out.println(s3);
-
-//        String s1 = predictPartyVictory1("RD");
-//        System.out.println(s1);
-//        System.out.println("---------------------");
-//        String s2 = predictPartyVictory1("RDD");
-//        System.out.println(s2);
-//        System.out.println("---------------------");
-//        String s3 = predictPartyVictory1("DDRRR");
-//        System.out.println(s3);
-
+    /**
+     * @param senate 字符串
+     * @return 胜利队伍的名字
+     */
+    public String predictPartyVictory31(String senate) {
+        StringBuilder builder = new StringBuilder(senate);
+        LinkedList<Character> queue = new LinkedList<>();
+        int index = 0;
+        while (queue.size() < builder.length()) {
+            if (queue.isEmpty() || builder.charAt(index) == queue.peek()) {
+                queue.offer(builder.charAt(index++));
+            } else {
+                queue.pop();
+                builder.deleteCharAt(index);
+            }
+            if (index >= builder.length()) index = 0;
+        }
+        return 'R' == queue.peek() ? "Radiant" : "Dire";
     }
 
     /**
