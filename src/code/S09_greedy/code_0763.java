@@ -1,6 +1,7 @@
 package code.S09_greedy;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -25,6 +26,33 @@ import java.util.List;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0763 {
+    /**
+     * time: O(n);      space: O(划分后的字符串列表长度)
+     *
+     * @param s 字符串
+     * @return 划分后的字符串列表
+     */
+    public List<Integer> partitionLabels31(String s) {
+        List<Integer> result = new LinkedList<>();
+        int start = 0, end = 0, distance = 0;
+        while (start < s.length() && end <= s.length()) {
+            distance = Math.max(start, s.indexOf(s.charAt(start), start + 1));
+            // 找字符串
+            while (end <= distance && end < s.length()) {
+                distance = Math.max(distance, s.indexOf(s.charAt(end), end + 1));
+                end++;
+            }
+            if (end == s.length()) {
+                result.add(s.length() - start);
+            } else {
+                result.add(distance - start + 1);
+            }
+            end++;
+            start = end;
+        }
+        return result;
+    }
+
     /**
      * @param s 字符串
      * @return 划分后的字符串列表
