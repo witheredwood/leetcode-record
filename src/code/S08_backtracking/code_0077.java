@@ -1,5 +1,6 @@
 package code.S08_backtracking;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,6 +36,31 @@ import java.util.List;
 public class code_0077 {
     List<List<Integer>> res = new LinkedList<>();  // 存放符合条件结果的集合
     LinkedList<Integer> path = new LinkedList<>();  // 存放符合条件的结果
+
+    /**
+     * @param n 整数
+     * @param k 整数
+     * @return 所有的 k 个数的组合
+     */
+    public List<List<Integer>> combine31(int n, int k) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> path = new LinkedList<>();
+        backtracking(1, k, n, path, result);
+        return result;
+    }
+
+    private void backtracking(int index, int k, int n, LinkedList<Integer> path, List<List<Integer>> result) {
+        if (path.size() == k) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int i = index; i <= n; i++) {
+            path.add(i);
+            backtracking(i + 1, k, n, path, result);
+            path.removeLast();
+        }
+    }
 
     /**
      * @param n 整数
