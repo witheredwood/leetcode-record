@@ -2,8 +2,10 @@ package code.S08_backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 第51题. N皇后
@@ -29,6 +31,65 @@ import java.util.List;
  */
 public class code_0051 {
     /**
+     * 用二维数组存储路径。
+     * 如果用List<StringBuilder> 存储路径，会消耗较多的时间，大概是因为子字符串频繁的修改
+     *
+     * @param n 皇后的个数
+     * @return 不同的 n 皇后问题 的解决方案
+     */
+    public List<List<String>> solveNQueens31(int n) {
+        Set<List<String>> result = new HashSet<>();
+        Character[][] path = new Character[n][n];
+        // 初始化
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                path[i][j] = '.';
+            }
+        }
+        backtracking(0, n, path, result);
+        return new ArrayList<>(result);
+    }
+
+    private void backtracking(int row, int n, Character[][] path, Set<List<String>> result) {
+        if (row == n) {
+            List<String> list = new ArrayList<>(n);
+            for (int i = 0; i < n; i++) {
+                StringBuilder builder = new StringBuilder();
+                for (int j = 0; j < n; j++) {
+                    builder.append(path[i][j]);
+                }
+                list.add(builder.toString());
+            }
+            result.add(list);
+            return;
+        }
+        // 该行放一个皇后
+        for (int col = 0; col < n; col++) {
+            // 检查该位置是否能放皇后，不能放能看下一个位置
+            if (!isHaveOtherQueue(row, col, path)) continue;
+            path[row][col] = 'Q';
+            backtracking(row + 1, n, path, result);
+            path[row][col] = '.';
+        }
+    }
+
+    private boolean isHaveOtherQueue(int row, int col, Character[][] path) {
+        // 同列无其他皇后
+        for (int r = 0; r < row; r++) {
+            if (path[r][col] == 'Q') return false;
+        }
+        // 从右到左无其他皇后
+        for (int r = row, c = col; r >= 0 && c >= 0; r--, c--) {
+            if (path[r][c] == 'Q') return false;
+        }
+        // 从左到右无其他皇后
+        for (int r = row, c = col; r >= 0 && c < path.length; r--, c++) {
+            if (path[r][c] == 'Q') return false;
+        }
+        return true;
+    }
+
+    /**
      * 回溯
      *
      * @param n 皇后的个数
@@ -49,7 +110,7 @@ public class code_0051 {
 
     /**
      * @param matrix n 皇后存放矩阵
-     * @param row 行数
+     * @param row    行数
      */
     public void backtracking(String[][] matrix, int row, List<List<String>> res) {
         if (row >= matrix.length) {
