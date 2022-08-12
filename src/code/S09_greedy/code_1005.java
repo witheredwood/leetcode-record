@@ -7,7 +7,7 @@ import java.util.Comparator;
  * 1005.K次取反后最大化的数组和
  * <p>
  * 给你一个整数数组 nums 和一个整数 k ，按以下方法修改该数组：
- * 选择某个下标 i 并将 nums[i] 替换为 -nums[i] 。
+ * 选择某个下标 i并将 nums[i] 替换为 -nums[i] 。
  * 重复这个过程恰好 k 次。可以多次选择同一个下标 i 。
  * 以这种方式修改数组后，返回数组 可能的最大和 。
  * <p>
@@ -34,6 +34,35 @@ import java.util.Comparator;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_1005 {
+    /**
+     * time: O(nlogn);      space: O(1)
+     *
+     * @param nums 整数数组
+     * @param k    正整数
+     * @return 数组的最大和
+     */
+    public int largestSumAfterKNegations31(int[] nums, int k) {
+        Arrays.sort(nums);
+        int first = 0;  // 非负数列表的第一个值的下标
+        int sum = 0;    // 数组的总和
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] < 0) first++;
+            sum += nums[i];
+        }
+        if (first > 0) {    // 数组中有负数
+            for (int i = 0; i < Math.min(k, first); i++) {
+                nums[i] = -nums[i];
+                sum += 2 * nums[i];     // 更新数组总和
+            }
+            k -= Math.min(k, first);        // 翻转了 min(k, first) 次
+            Arrays.sort(nums);      // 将没有负数的数组重排
+        }
+        // 经过上一个处理后，要么翻转次数用完（数组中可能还有负数），要么数组中没有负数（还有几次翻转次数）
+        // 翻转次数剩余0次，或者，数组一个数是0，或者，翻转次数还剩余偶数次，均直接返回数组总和
+        if (k == 0 || nums[0] == 0 || k % 2 == 0) return sum;
+        return sum - 2 * nums[0];
+    }
+
     /**
      * 选择 k 个最小的数取反，如果数组中有0，则不用对大于0的正数取反
      * 时间复杂度 O(k*nlogn)，空间复杂度 O(1)
