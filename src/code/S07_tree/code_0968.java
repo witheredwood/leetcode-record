@@ -39,7 +39,7 @@ public class code_0968 {
      * @param root 二叉树根节点
      * @return 所有节点所需的最小摄像头数量
      */
-    public int minCameraCover(TreeNode root) {
+    public int minCameraCover31(TreeNode root) {
         NODE_TYPE result = postorder(root);
         return result == NODE_TYPE.NOT_MONITORED ? this.count + 1 : this.count;
     }
@@ -59,5 +59,41 @@ public class code_0968 {
         } else {
             return NODE_TYPE.NOT_MONITORED;
         }
+    }
+
+    /**
+     * @param root 二叉树根节点
+     * @return 放置摄像头的个数
+     */
+    public int minCameraCover(TreeNode root) {
+        if (root.left == null && root.right == null) return 1;
+        int c = traverse(root);
+        System.out.println("c = " + c + " num = " + count);
+        if (c == 0) count++;
+        return count;
+    }
+
+    /**
+     * 二叉树中的节点有4中状态：0 - 无监控，1 - 被监控，2 - 摄像头
+     * -------
+     * 空节点是有监控状态
+     * -------
+     * 左右子节点都是有监控状态，那么该节点是无监控状态，在该节点的父节点放置摄像头；
+     * -------
+     * 其余情况需要放置摄像头；
+     *
+     * @param root 二叉树根节点
+     * @return 该节点的状态
+     */
+    public int traverse(TreeNode root) {
+        if (root == null) return 1;  // 空节点是有监控状态
+        int l = traverse(root.left);
+        int r = traverse(root.right);
+        // 两个子节点都是有监控状态，那么当前节点是无监控状态，在当前节点的父节点安装摄像头
+        if (l == 1 && r == 1) return 0;
+        // 该节点被监控的情况，子节点中有一个是摄像头
+        if ((l == 2 && r != 0) || (r == 2 && l != 0)) return 1;
+        count++;
+        return 2;
     }
 }
