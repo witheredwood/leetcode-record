@@ -25,28 +25,28 @@ class code_0486Test extends code_0486 {
     @Test
     void predictTheWinner() {
         int[] nums = {1, 5, 2};
-        boolean flag = PredictTheWinner(nums);
+        boolean flag = PredictTheWinner33(nums);
         Assertions.assertEquals(false, flag);
     }
 
     @Test
     void predictTheWinner2() {
         int[] nums = {1, 5, 233, 7};
-        boolean flag = PredictTheWinner(nums);
+        boolean flag = PredictTheWinner33(nums);
         Assertions.assertEquals(true, flag);
     }
 
     @Test
     void predictTheWinner3() {
         int[] nums = {1000, 999, 999, 1000, 555, 400};
-        boolean flag = PredictTheWinner(nums);
+        boolean flag = PredictTheWinner33(nums);
         Assertions.assertEquals(true, flag);
     }
 
     @Test
     void predictTheWinner4() {
         int[] nums = {3606449, 6, 5, 9, 452429, 7, 9580316, 9857582, 8514433, 9, 6, 6614512, 753594, 5474165, 4, 2697293, 8, 7, 1};
-        boolean flag = PredictTheWinner(nums);
+        boolean flag = PredictTheWinner33(nums);
         Assertions.assertEquals(false, flag);
     }
 }
