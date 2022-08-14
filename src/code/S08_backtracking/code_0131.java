@@ -1,5 +1,6 @@
 package code.S08_backtracking;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,6 +22,40 @@ import java.util.List;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_0131 {
+    /**
+     * @param s 字符串
+     * @return 子串都是 回文串 的子集的集合
+     */
+    public List<List<String>> partition31(String s) {
+        List<List<String>> result = new LinkedList<>();
+        List<String> path = new LinkedList<>();
+        backtracking(s, 0, path, result);
+        return result;
+    }
+
+    private void backtracking(String s, int startIndex, List<String> path, List<List<String>> result) {
+        if (startIndex == s.length()) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        for (int j = startIndex + 1; j <= s.length(); j++) {
+            String cur = s.substring(startIndex, j);
+            if (!isPalindrome(cur)) continue;   // 当前子串不是回文串
+            path.add(cur);
+            backtracking(s, j, path, result);
+            path.remove(path.size() - 1);
+        }
+    }
+
+    private boolean isPalindrome(String s) {
+        if (s.length() == 1) return true;
+        for (int i = 0, j = s.length() - 1; i < j; i++, j--) {
+            if (s.charAt(i) != s.charAt(j)) return false;
+        }
+        return true;
+    }
+
+
     /**
      * 回溯：使用参数保存符合条件的结果
      *
@@ -69,7 +104,7 @@ public class code_0131 {
      */
     public boolean isHuiWen(String s) {
         for (int i = 0, j = s.length() - 1; i < j; i++, j--) {
-            if (s.charAt(i) != s.charAt(j)){
+            if (s.charAt(i) != s.charAt(j)) {
                 return false;
             }
         }
