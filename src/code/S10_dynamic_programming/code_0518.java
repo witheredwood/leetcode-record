@@ -7,7 +7,7 @@ import java.util.Arrays;
  * <p>
  * 给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。
  * 请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。
- * 假设每一种面额的硬币有无限个。 
+ * 假设每一种面额的硬币有无限个。
  * 题目数据保证结果符合 32 位带符号整数。
  * <p>
  * 示例 1：
@@ -24,7 +24,7 @@ import java.util.Arrays;
  * 解释：只用面额 2 的硬币不能凑成总金额 3 。
  * 示例 3：
  * 输入：amount = 10, coins = [10]
- * 输出：1 
+ * 输出：1
  * <p>
  * 提示：
  * 1 <= coins.length <= 300
@@ -38,6 +38,28 @@ import java.util.Arrays;
  */
 public class code_0518 {
     /**
+     * 依次考虑当前总金额
+     * time: O(m*n);        space: O(m)
+     * m, 是 amount 的值；n 是 coins 的长度
+     *
+     * @param amount 总金额
+     * @param coins  硬币面值数组
+     * @return 总金额可以由现有的面值数组组成，有多少种方案
+     */
+    public int change31(int amount, int[] coins) {
+        int[] counts = new int[amount + 1];
+        // 初始化
+        counts[0] = 1;
+        // 遍历硬币，求解个数
+        for (int i = 0; i < coins.length; i++) {
+            for (int j = coins[i]; j <= amount; j++) {
+                counts[j] += counts[j - coins[i]];
+            }
+        }
+        return counts[amount];
+    }
+
+    /**
      * 动态规划：完全背包
      * 使用二维数组存储，dp[j]: 总金额为 j 时，有多少种组合方案
      * 递推公式 / 状态转移方程，dp[j] = dp[j] + dp[j-coins[i]] 不放+放 的方案数
@@ -46,7 +68,7 @@ public class code_0518 {
      * 1 [1,1,1,1,1,1]
      * 2 [1,1,2,2,3,3]
      * 5 [1,1,2,2,3,4]
-     * 
+     *
      * @param amount 总金额
      * @param coins  硬币面值数组
      * @return 总金额可以由现有的面值数组组成，有多少种方案
