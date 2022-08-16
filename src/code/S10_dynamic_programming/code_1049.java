@@ -1,12 +1,14 @@
 package code.S10_dynamic_programming;
 
+import java.util.Arrays;
+
 /**
  * 1049. 最后一块石头的重量 II
  * <p>
- * 有一堆石头，用整数数组 stones 表示。其中 stones[i] 表示第 i 块石头的重量。
- * 每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x <= y。那么粉碎的可能结果如下：
- * 如果 x == y，那么两块石头都会被完全粉碎；
- * 如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
+ * 有一堆石头，用整数数组stones 表示。其中stones[i] 表示第 i 块石头的重量。
+ * 每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为x 和y，且x <= y。那么粉碎的可能结果如下：
+ * 如果x == y，那么两块石头都会被完全粉碎；
+ * 如果x != y，那么重量为x的石头将会完全粉碎，而重量为y的石头新重量为y-x。
  * 最后，最多只会剩下一块 石头。返回此石头 最小的可能重量 。如果没有石头剩下，就返回 0。
  * <p>
  * 示例 1：
@@ -23,7 +25,6 @@ package code.S10_dynamic_programming;
  * 示例 3：
  * 输入：stones = [1,2]
  * 输出：1
- *  
  * <p>
  * 提示：
  * 1 <= stones.length <= 30
@@ -34,6 +35,37 @@ package code.S10_dynamic_programming;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class code_1049 {
+    /**
+     * time: O(m*n);        space: O(n)
+     * m, 是石头总重量的一半；n, 是石头的个数，也就是 stones 的长度
+     * <p>
+     * 以 [2,7,4,1,8,1] 为例，
+     * [2, 4] 消， [7,8]消， [1, 1] 消，也就是 (4-2), (8-7), (1-1)，剩余数组为 [2, 1, 1]
+     * [2, 1] 消 ，也就是 (2-1) = (4-2)-(8-7) = (4+7)-(2+8) ，剩余数组为 [1, 1]
+     * [1, 1] 消 ，也就是 (1-1) = (2-1) - 1 = (4-2)-(8-7) - 1 = (4+7)-(2+8+1) = 11 - 11 = 0，剩余数组为 [0]
+     * 所以，只要找到一半的数，相加的和最接近总和一半就可以。
+     * 为了保证使用的是一半的数，而不是多个数（比如一半是4个，一半是1个）这种情况，
+     * 将数组排序后，从大到小找
+     *
+     * @param stones 整数数组
+     * @return 粉碎后剩余的最小重量
+     */
+    public int lastStoneWeightII31(int[] stones) {
+        Arrays.sort(stones);    // 升序
+        int sum = 0;
+        for (int stone : stones) {
+            sum += stone;
+        }
+        int half = sum / 2;
+        int[] nums = new int[half + 1];
+        for (int i = stones.length - 1; i >= 0; i--) {
+            for (int j = half; j >= stones[i]; j--) {
+                nums[j] = Math.max(nums[j], nums[j - stones[i]] + stones[i]);
+            }
+        }
+        return sum - nums[half] * 2;
+    }
+
     /**
      * 动态规划：0-1 背包问题
      * 将数组分成两个子集，使其总和之差尽可能的小，也就是尽可能总和接近总重量的一半
