@@ -1,16 +1,17 @@
 package code.S08_backtracking;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * 216.组合总和III
  * <p>
- * 找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
+ * 找出所有相加之和为n 的k个数的组合。组合中只允许含有 1 -9 的正整数，并且每种组合中不存在重复的数字。
  * <p>
  * 说明：
  * 所有数字都是正整数。
- * 解集不能包含重复的组合。 
+ * 解集不能包含重复的组合。
  * <p>
  * 示例 1:
  * 输入: k = 3, n = 7
@@ -27,6 +28,34 @@ public class code_0216 {
     List<List<Integer>> res = new LinkedList<>();  // 保存符合条件的结果的集合
     LinkedList<Integer> path = new LinkedList<>();  // 保存符合条件的结果
     int sum = 0;  // 符合条件的结果的路径的总和
+
+
+    /**
+     * @param k 整数
+     * @param n 组合相加之和
+     * @return 整数相加等于 n 的所有组合
+     */
+    public List<List<Integer>> combinationSum331(int k, int n) {
+        List<List<Integer>> result = new LinkedList<>();
+        List<Integer> path = new LinkedList<>();
+        backtracking(k, n, 1, 0, path, result);
+        return result;
+    }
+
+    private void backtracking(int k, int n, int startIndex, int sum, List<Integer> path, List<List<Integer>> result) {
+        if (path.size() > k) return;
+        if (path.size() == k) {
+            if (sum == n) {
+                result.add(new ArrayList<>(path));
+            }
+            return;
+        }
+        for (int i = startIndex; i <= 9; i++) {
+            path.add(i);
+            backtracking(k, n, i + 1, sum + i, path, result);
+            path.remove(path.size() - 1);
+        }
+    }
 
     /**
      * 回溯：使用全局变量保存符合条件的结果
