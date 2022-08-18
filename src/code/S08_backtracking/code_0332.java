@@ -54,7 +54,7 @@ public class code_0332 {
         List<String> path = new LinkedList<>();
         path.add("JFK");
         List<String> result = backtracking("JFK", n, map, counts, path);
-        
+
         if (result == null || result.size() == 1) return new LinkedList<>();
         return result;
     }
