@@ -28,6 +28,35 @@ public class code_0491 {
      * @param nums 整数数组
      * @return 所有该数组中不同的递增子序列
      */
+    public List<List<Integer>> findSubsequences31(int[] nums) {
+        boolean[] visited = new boolean[nums.length];
+        List<Integer> path = new LinkedList<>();
+        Set<List<Integer>> result = new HashSet<>();
+        backtracking(nums, 0, visited, path, result);
+        return new ArrayList<>(result);
+    }
+
+    private void backtracking(int[] nums, int startIndex, boolean[] visited, List<Integer> path, Set<List<Integer>> result) {
+        if (startIndex >= nums.length) return;
+
+        for (int i = startIndex; i < nums.length; i++) {
+            if (i > 0 && nums[i] == nums[i - 1] && visited[i - 1]) continue;
+            if (!path.isEmpty() && nums[i] < path.get(path.size() - 1)) continue;   // 当前数比上一层小
+            visited[i] = false;
+            path.add(nums[i]);
+            if (path.size() > 1) {
+                result.add(new ArrayList<>(path));
+            }
+            backtracking(nums, i + 1, visited, path, result);
+            path.remove(path.size() - 1);
+            visited[i] = true;
+        }
+    }
+
+    /**
+     * @param nums 整数数组
+     * @return 所有该数组中不同的递增子序列
+     */
     public List<List<Integer>> findSubsequences(int[] nums) {
         if (nums.length < 2) return new LinkedList<>();
         /** 符合条件的结果的集合，去重 */
