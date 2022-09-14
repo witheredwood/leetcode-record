@@ -1,5 +1,7 @@
 package code.S10_dynamic_programming;
 
+import java.util.Arrays;
+
 /**
  * 486. 预测赢家
  * <p>
@@ -79,6 +81,9 @@ public class code_0486 {
     public boolean PredictTheWinner32(int[] nums) {
         int score = 0;      // 玩家1相对于玩家2的得分
         int[][] memo = new int[nums.length][nums.length];       // 存储递归结果
+        for (int i = 0; i < nums.length; i++) {
+            Arrays.fill(memo[i], Integer.MIN_VALUE);
+        }
         score = memoRecursive(nums, 1, 0, nums.length - 1, memo);
         return score >= 0;
     }
@@ -92,14 +97,17 @@ public class code_0486 {
      */
     private int memoRecursive(int[] nums, int play, int low, int high, int[][] memo) {
         if (low == high) return play == 1 ? nums[low] : -nums[low];
+        if (memo[low][high] != Integer.MIN_VALUE) return memo[low][high];
         // 下层递归的结果
-        int leftScore = memo[low][high] > 0 ? memo[low][high] : memoRecursive(nums, -play, low + 1, high, memo);
-        int rightScore = memo[low][high] > 0 ? memo[low][high] : memoRecursive(nums, -play, low, high - 1, memo);
+        int leftScore = memoRecursive(nums, -play, low + 1, high, memo);
+        int rightScore = memoRecursive(nums, -play, low, high - 1, memo);
+        memo[low][high] = Math.max(leftScore, rightScore);
         // 选择的分数+下层递归的最佳得分。
         // 如果是己方，己方分数是正
-        if (play == 1) return Math.max(nums[low] + leftScore, nums[high] + rightScore);
-        // 如果是对方，对方分数是负
-        return Math.min(-nums[low] + leftScore, -nums[high] + rightScore);
+        if (play == 1) memo[low][high] = Math.max(nums[low] + leftScore, nums[high] + rightScore);
+            // 如果是对方，对方分数是负
+        else memo[low][high] = Math.min(-nums[low] + leftScore, -nums[high] + rightScore);
+        return memo[low][high];
     }
 
     /**
